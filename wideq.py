@@ -5,7 +5,7 @@ import base64
 import json
 import hashlib
 import hmac
-import datetime
+from datetime import datetime, timedelta
 from collections import namedtuple
 import enum
 import time
@@ -14,8 +14,8 @@ GATEWAY_URL = 'https://kic.lgthinq.com:46030/api/common/gatewayUriList'
 APP_KEY = 'wideq'
 SECURITY_KEY = 'nuts_securitykey'
 DATA_ROOT = 'lgedmRoot'
-COUNTRY = 'KR'
-LANGUAGE = 'ko-KR'
+COUNTRY = 'DE'
+LANGUAGE = 'de-DE'
 SVC_CODE = 'SVC202'
 CLIENT_ID = 'LGAO221A02'
 OAUTH_SECRET_KEY = 'c053c2a6ddeb7ad97cb0eed0dcb31cf8'
@@ -25,22 +25,19 @@ DATE_FORMAT = '%a, %d %b %Y %H:%M:%S +0000'
 """HVAC STATE"""
 STATE_COOL = '냉방'
 STATE_DRY = '제습'
-STATE_AIRCLEAN = 'ON'
-STATE_AIRCLEAN_OFF = 'OFF'
-STATE_SMARTCARE = 'ON'
-STATE_SMARTCARE_OFF = 'OFF'
-STATE_AUTODRY = 'ON'
-STATE_AUTODRY_OFF = 'OFF'
-STATE_POWERSAVE = 'ON'
-STATE_POWERSAVE_OFF = 'OFF'
-STATE_COOLPOWER = 'ON'
-STATE_COOLPOWER_OFF = 'OFF'
-STATE_LONGPOWER = 'ON'
-STATE_LONGPOWER_OFF = 'OFF'
+STATE_HEAT = '난방'
+STATE_AI = '인공지능'
+STATE_FAN = '송풍'
+STATE_ACO = 'ACO'
+
+STATE_MODE_ON = 'ON'
+STATE_MODE_OFF = 'OFF'
 
 STATE_LOW = '약'
 STATE_MID = '중'
 STATE_HIGH = '강'
+STATE_AUTO = '자동'
+STATE_POWER = '파워'
 STATE_RIGHT_LOW_LEFT_MID = '우약/좌중'
 STATE_RIGHT_LOW_LEFT_HIGH = '우약/좌강'
 STATE_RIGHT_MID_LEFT_LOW = '우중/좌약'
@@ -55,24 +52,45 @@ STATE_LEFT_ONLY_MID = '좌중'
 STATE_LEFT_ONLY_HIGH = '좌강'
 
 STATE_LEFT_RIGHT = '좌/우'
+STATE_LEFT_RIGHT_ON = '좌/우'
 STATE_RIGHTSIDE_LEFT_RIGHT = '우측 좌/우'
 STATE_LEFTSIDE_LEFT_RIGHT = '좌측 좌/우'
 STATE_LEFT_RIGHT_STOP = '정지'
 
-STATE_UP_DOWN = 'ON'
-STATE_UP_DOWN_STOP = 'OFF'
+STATE_WDIRVSTEP_OFF = '꺼짐'
+STATE_WDIRVSTEP_FIRST = '1단계'
+STATE_WDIRVSTEP_SECOND = '2단계'
+STATE_WDIRVSTEP_THIRD = '3단계'
+STATE_WDIRVSTEP_FOURTH = '4단계'
+STATE_WDIRVSTEP_FIFTH = '5단계'
+STATE_WDIRVSTEP_SIXTH = '6단계'
+
 
 """REFRIGERATOR STATE"""
-STATE_ICE_PLUS = 'ON'
-STATE_ICE_PLUS_OFF = 'OFF'
+STATE_ICE_PLUS = '켜짐'
+STATE_ICE_PLUS_OFF = '꺼짐'
 
+STATE_FRESH_AIR_FILTER_REPLACE_FILTER = '필터교체필요'
+STATE_FRESH_AIR_FILTER_SMART_CARE_ON = '켜짐'
+STATE_FRESH_AIR_FILTER_SMART_CARE_OFF = '꺼짐'
+STATE_FRESH_AIR_FILTER_SMART_CARE_WAIT = '대기'
 STATE_FRESH_AIR_FILTER_POWER = '파워'
 STATE_FRESH_AIR_FILTER_AUTO = '자동'
 STATE_FRESH_AIR_FILTER_OFF = '꺼짐'
 
+
 STATE_SMART_SAVING_NIGHT = 'NIGHT'
 STATE_SMART_SAVING_CUSTOM = 'CUSTOM'
 STATE_SMART_SAVING_OFF = 'OFF'
+
+STATE_REF_WATERFILTER_OK = '정상'
+STATE_REF_WATERFILTER_REPLACE = '교체필요'
+STATE_REF_WATERFILTER_NO_FILTER = '정수기없음'
+
+STATE_REF_ACTIVESAVING_ZERO = '0'
+STATE_REF_ACTIVESAVING_ONE = '1'
+STATE_REF_ACTIVESAVING_TWO = '2'
+STATE_REF_ACTIVESAVING_THREE = '3'
 
 """DRYER STATE"""
 STATE_DRYER_POWER_OFF = '꺼짐'
@@ -139,31 +157,35 @@ STATE_ERROR_EMPTYWATER = '물통 가득참 - 물통을 비워주세요'
 STATE_ERROR_CE1 = 'ERROR_CE1'
 STATE_NO_ERROR = '정상'
 
-STATE_OPTIONITEM_ON = '켜짐'
-STATE_OPTIONITEM_OFF = '꺼짐'
+STATE_OPTIONITEM_ON = 'On'
+STATE_OPTIONITEM_OFF = 'Off'
 
 """WASHER STATE"""
-STATE_WASHER_POWER_OFF = '꺼짐'
-STATE_WASHER_INITIAL = '코스선택'
-STATE_WASHER_PAUSE = '일시정지'
-STATE_WASHER_ERROR_AUTO_OFF = '에러_자동종료'
-STATE_WASHER_RESERVE = '예약중'
-STATE_WASHER_DETECTING = '세탁물 감지 중'
+STATE_WASHER_POWER_OFF = 'Off'
+STATE_WASHER_INITIAL = 'Select Course'
+STATE_WASHER_PAUSE = 'Paused'
+STATE_WASHER_ERROR_AUTO_OFF = 'Automatic Poweroff Error'
+STATE_WASHER_RESERVE = 'Reserved'
+STATE_WASHER_DETECTING = 'Detecting'
 STATE_WASHER_ADD_DRAIN = 'ADD_DRAIN'
-STATE_WASHER_DETERGENT_AMOUT = '세제량'
-STATE_WASHER_RUNNING = '세탁 중'
-STATE_WASHER_PREWASH = '애벌세탁 중'
-STATE_WASHER_RINSING = '헹굼 중'
-STATE_WASHER_RINSE_HOLD = '헹굼 대기'
-STATE_WASHER_SPINNING = '탈수 중'
-STATE_WASHER_DRYING = '건조 중'
-STATE_WASHER_END = '종료'
+STATE_WASHER_DETERGENT_AMOUT = 'Detergent Amount'
+STATE_WASHER_RUNNING = 'Washing'
+STATE_WASHER_PREWASH = 'Pre-Wash'
+STATE_WASHER_RINSING = 'Rinsing'
+STATE_WASHER_RINSE_HOLD = 'Rinsing [On Hold]'
+STATE_WASHER_SPINNING = 'Spinning'
+STATE_WASHER_DRYING = 'Drying'
+STATE_WASHER_END = 'End'
+STATE_WASHER_REFRESHWITHSTEAM = 'Refreshing with steam'
+STATE_WASHER_COOLDOWN = 'Cooldown'
+STATE_WASHER_STEAMSOFTENING = 'Using softener with steam'
+STATE_WASHER_ERRORSTATE = 'An error occured'
 STATE_WASHER_FRESHCARE = 'FreshCare'
-STATE_WASHER_TCL_ALARM_NORMAL = '통세척'
-STATE_WASHER_FROZEN_PREVENT_INITIAL = '동파방지_초기화'
-STATE_WASHER_FROZEN_PREVENT_RUNNING = '동파방지_동작중'
-STATE_WASHER_FROZEN_PREVENT_PAUSE = '동파방지_일시정지'
-STATE_WASHER_ERROR = '에러'
+STATE_WASHER_TCL_ALARM_NORMAL = 'Pipe Clogged'
+STATE_WASHER_FROZEN_PREVENT_INITIAL = 'Error during initialization'
+STATE_WASHER_FROZEN_PREVENT_RUNNING = 'Unfreezing system, please wait'
+STATE_WASHER_FROZEN_PREVENT_PAUSE = 'System is being unfrozen, you cannot pause this operation.'
+STATE_WASHER_ERROR = 'Error'
 
 STATE_WASHER_SOILLEVEL_LIGHT = '적은때'
 STATE_WASHER_SOILLEVEL_NORMAL = '표준'
@@ -171,23 +193,30 @@ STATE_WASHER_SOILLEVEL_HEAVY = '강력'
 STATE_WASHER_SOILLEVEL_PRE_WASH = '애벌세탁'
 STATE_WASHER_SOILLEVEL_SOAKING = '불림'
 
-STATE_WASHER_WATERTEMP_COLD = '냉수'
+STATE_WASHER_WATERTEMP_COLD = 'Cold'
+STATE_WASHER_WATERTEMP_20 = '20℃'
 STATE_WASHER_WATERTEMP_30 = '30℃'
 STATE_WASHER_WATERTEMP_40 = '40℃'
 STATE_WASHER_WATERTEMP_60 = '60℃'
 STATE_WASHER_WATERTEMP_95 = '95℃'
 
-STATE_WASHER_SPINSPEED_EXTRA_LOW = '섬세'
-STATE_WASHER_SPINSPEED_LOW = '약'
-STATE_WASHER_SPINSPEED_MEDIUM = '중'
-STATE_WASHER_SPINSPEED_HIGH = '강'
-STATE_WASHER_SPINSPEED_EXTRA_HIGH = '건조맞춤'
+STATE_WASHER_SPINSPEED_EXTRA_LOW = 'Extra low Spin'
+STATE_WASHER_SPINSPEED_LOW = 'Low Spin'
+STATE_WASHER_SPINSPEED_MEDIUM = 'Medium Spin'
+STATE_WASHER_SPINSPEED_HIGH = 'High Spin'
+STATE_WASHER_SPINSPEED_EXTRA_HIGH = 'Extra high Spin'
+STATE_WASHER_SPINSPEED_NOSPIN = 'No Spin'
+STATE_WASHER_SPINSPEED_400 = '400 RPM'
+STATE_WASHER_SPINSPEED_800 = '800 RPM'
+STATE_WASHER_SPINSPEED_1000 = '1000 RPM'
+STATE_WASHER_SPINSPEED_1200 = '1200 RPM'
+STATE_WASHER_SPINSPEED_1400 = '1400 RPM'
 
-STATE_WASHER_RINSECOUNT_1 = '1회'
-STATE_WASHER_RINSECOUNT_2 = '2회'
-STATE_WASHER_RINSECOUNT_3 = '3회'
-STATE_WASHER_RINSECOUNT_4 = '4회'
-STATE_WASHER_RINSECOUNT_5 = '5회'
+STATE_WASHER_RINSECOUNT_1 = 'First Rinse'
+STATE_WASHER_RINSECOUNT_2 = 'Second Rinse'
+STATE_WASHER_RINSECOUNT_3 = 'Third Rinse'
+STATE_WASHER_RINSECOUNT_4 = 'Forth Rinse'
+STATE_WASHER_RINSECOUNT_5 = 'Fith Rinse'
 
 STATE_WASHER_DRYLEVEL_WIND = '바람건조'
 STATE_WASHER_DRYLEVEL_TURBO = '터보건조'
@@ -197,24 +226,25 @@ STATE_WASHER_DRYLEVEL_TIME_90 = '시간건조_90분'
 STATE_WASHER_DRYLEVEL_TIME_120 = '시간건조_120분'
 STATE_WASHER_DRYLEVEL_TIME_150 = '시간건조_150분'
 
-STATE_WASHER_NO_ERROR = '정상'
-STATE_WASHER_ERROR_dE2 = '문열림 에러 - 문이 닫혔는지 확인하세요'
-STATE_WASHER_ERROR_IE = '급수안됨'
-STATE_WASHER_ERROR_OE = '배수안됨'
-STATE_WASHER_ERROR_UE = '세탁물 치우침'
-STATE_WASHER_ERROR_FE = 'FE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_PE = 'PE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_LE = 'LE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_tE = 'tE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_dHE = 'dHE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_CE = 'CE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_PF = 'PF - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_FF = '제품 얼음'
-STATE_WASHER_ERROR_dCE = 'dCE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_EE = 'EE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_PS = 'PS - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_dE1 = '문열림 에러 - 문이 닫혔는지 확인하세요'
-STATE_WASHER_ERROR_LOE = '세제통 문열림 에러 - 세제통 문이 닫혔는지 확인하세요'
+STATE_WASHER_NO_ERROR = 'Normal'
+STATE_WASHER_ERROR_dE2 = 'Door open - Please close the door'
+STATE_WASHER_ERROR_IE = 'No water - Please make sure the water has enough pressure to reach the washer.'
+STATE_WASHER_ERROR_OE = 'Drain error - Please make sure the pipe is not clogged/frozen'
+STATE_WASHER_ERROR_UE = 'Laundry trim'
+STATE_WASHER_ERROR_FE = 'FE - Contact Service Center'
+STATE_WASHER_ERROR_PE = 'PE - Contact Service Center'
+STATE_WASHER_ERROR_LE = 'LE - Contact Service Center'
+STATE_WASHER_ERROR_tE = 'tE - Contact Service Center'
+STATE_WASHER_ERROR_dHE = 'dHE - Contact Service Center'
+STATE_WASHER_ERROR_CE = 'CE - Contact Service Center'
+STATE_WASHER_ERROR_PF = 'PF - Contact Service Center'
+STATE_WASHER_ERROR_FF = 'The washer is frozen, please warm up the surrounding area.'
+STATE_WASHER_ERROR_dCE = 'dCE - Contact Service Center'
+STATE_WASHER_ERROR_EE = 'EE - Contact Service Center'
+STATE_WASHER_ERROR_PS = 'PS - Contact Service Center'
+STATE_WASHER_ERROR_dE1 = 'Door open - Please close the door'
+STATE_WASHER_ERROR_LOE = 'Detergent door is open - Please close the detergent door'
+STATE_NO_ERROR = 'Normal'
 
 STATE_WASHER_APCOURSE_COTTON = '표준세탁'
 STATE_WASHER_APCOURSE_SPEEDWASH_DRY = '스피드워시+건조'
@@ -233,26 +263,47 @@ STATE_WASHER_APCOURSE_COLDWASH = '찬물세탁'
 STATE_WASHER_APCOURSE_TUBCLEAN_SANITARY = '통살균'
 STATE_WASHER_APCOURSE_DOWNLOAD_COUSE = '다운로드코스'
 
-STATE_WASHER_SMARTCOURSE_SILENT = '조용조용'
-STATE_WASHER_SMARTCOURSE_SMALL_LOAD = '소량 세탁'
-STATE_WASHER_SMARTCOURSE_SKIN_CARE = '스킨 케어'
-STATE_WASHER_SMARTCOURSE_RAINY_SEASON = '장마철 세탁'
-STATE_WASHER_SMARTCOURSE_SWEAT_STAIN = '땀얼룩 제거'
-STATE_WASHER_SMARTCOURSE_SINGLE_GARMENT = '한벌 세탁'
-STATE_WASHER_SMARTCOURSE_SCHOOL_UNIFORM = '교복'
-STATE_WASHER_SMARTCOURSE_STATIC_REMOVAL = '정전기 제거'
-STATE_WASHER_SMARTCOURSE_COLOR_CARE = '컬러 케어'
-STATE_WASHER_SMARTCOURSE_SPIN_ONLY = '탈수 전용'
-STATE_WASHER_SMARTCOURSE_DEODORIZATION = '냄새 제거'
-STATE_WASHER_SMARTCOURSE_BEDDING_CARE = '침구 케어'
-STATE_WASHER_SMARTCOURSE_CLOTH_CARE = '옷감 보호'
-STATE_WASHER_SMARTCOURSE_SMART_RINSE = '안심 헹굼'
-STATE_WASHER_SMARTCOURSE_ECO_WASH = '알뜰 세탁'
+STATE_WASHER_SMARTCOURSE_SILENT = 'Silent'
+STATE_WASHER_SMARTCOURSE_SMALL_LOAD = 'Small Load'
+STATE_WASHER_SMARTCOURSE_SKIN_CARE = 'Skin Care'
+STATE_WASHER_SMARTCOURSE_RAINY_SEASON = 'Rainy Season'
+STATE_WASHER_SMARTCOURSE_SWEAT_STAIN = 'Sweat/Stains Removal'
+STATE_WASHER_SMARTCOURSE_SINGLE_GARMENT = 'Single Garment'
+STATE_WASHER_SMARTCOURSE_SCHOOL_UNIFORM = 'School Uniform'
+STATE_WASHER_SMARTCOURSE_STATIC_REMOVAL = 'Static Removal'
+STATE_WASHER_SMARTCOURSE_COLOR_CARE = 'Color Care'
+STATE_WASHER_SMARTCOURSE_SPIN_ONLY = 'Spin Only'
+STATE_WASHER_SMARTCOURSE_DEODORIZATION = 'Deodorization'
+STATE_WASHER_SMARTCOURSE_BEDDING_CARE = 'Bedding Care'
+STATE_WASHER_SMARTCOURSE_CLOTH_CARE = 'Cloth Care'
+STATE_WASHER_SMARTCOURSE_SMART_RINSE = 'Smart Rinse'
+STATE_WASHER_SMARTCOURSE_ECO_WASH = 'Economy Wash'
 
-STATE_WASHER_TERM_NO_SELECT = '선택 안함'
+STATE_WASHER_TERM_NO_SELECT = 'Nothing selected yet'
 
-STATE_WASHER_OPTIONITEM_ON = '켜짐'
-STATE_WASHER_OPTIONITEM_OFF = '꺼짐'
+STATE_WASHER_OPTIONITEM_ON = 'On'
+STATE_WASHER_OPTIONITEM_OFF = 'Off'
+
+"""DEHUMIDIFIER STATE"""
+STATE_DEHUM_ON = '동작 중'
+STATE_DEHUM_OFF = '꺼짐'
+
+STATE_DEHUM_OPMODE_SMART_DEHUM = '스마트제습'
+STATE_DEHUM_OPMODE_FAST_DEHUM = '쾌속제습'
+STATE_DEHUM_OPMODE_SILENT_DEHUM = '저소음제습'
+STATE_DEHUM_OPMODE_CONCENTRATION_DRY = '집중건조'
+STATE_DEHUM_OPMODE_CLOTHING_DRY = '의류건조'
+STATE_DEHUM_OPMODE_IONIZER = '공기제균'
+
+STATE_DEHUM_WINDSTRENGTH_LOW = '약풍'
+STATE_DEHUM_WIDESTRENGTH_HIGH = '강풍'
+
+STATE_DEHUM_AIRREMOVAL_ON = '켜짐'
+STATE_DEHUM_AIRREMOVAL_OFF = '꺼짐'
+
+"""WATERPURIFIER STATE"""
+STATE_WATERPURIFIER_COCKCLEAN_WAIT = '셀프케어 대기 중'
+STATE_WATERPURIFIER_COCKCLEAN_ON = '셀프케어 진행 중'
 
 def gen_uuid():
     return str(uuid.uuid4())
@@ -357,6 +408,8 @@ def lgedm_post(url, data=None, access_token=None, session_id=None):
                 raise NotLoggedInError()
             elif code == "0106":
                 raise NotConnectError()
+            elif code == "0010":
+                return out
             else:
                 raise APIError(code, message)
 
@@ -433,7 +486,7 @@ def refresh_auth(oauth_root, refresh_token):
     # through a request to the date/time endpoint:
     # https://us.lgeapi.com/datetime
     # But we can also just generate a timestamp.
-    timestamp = datetime.datetime.utcnow().strftime(DATE_FORMAT)
+    timestamp = datetime.utcnow().strftime(DATE_FORMAT)
 
     # The signature for the requests is on a string consisting of two
     # parts: (1) a fake request URL containing the refresh token, and (2)
@@ -618,6 +671,33 @@ class Session(object):
         self.post('rti/delControlPermission', {
             'deviceId': device_id,
         })
+
+    def get_power_data(self, device_id, period):
+        res = self.post('aircon/inquiryPowerData', {
+            'deviceId': device_id,
+            'period': period,
+        })
+        code = res.get('returnCd')  # returnCode can be missing.
+        if code == '0000':
+            return res['powerData']
+        elif code == '0010':
+            return '0'
+        else:
+            raise MonitorError(device_id, code)
+
+    def get_water_usage(self, device_id, typeCode, sDate, eDate):
+        res = self.post('rms/inquiryWaterConsumptionInfo', {
+            'deviceId': device_id,
+            'type': typeCode,
+            'startDate': sDate,
+            'endDate': eDate,
+        })
+        
+        code = res.get('returnCd')  # returnCode can be missing.
+        if code != '0000':
+            raise MonitorError(device_id, code)
+        else:
+            return res['item']
 
 class Monitor(object):
     """A monitoring task for a device.
@@ -864,7 +944,11 @@ class DeviceInfo(object):
     @property
     def name(self):
         return self.data['alias']
-    
+
+    @property
+    def macaddress(self):
+        return self.data['macAddress']
+
     @property
     def type(self):
         """The kind of device, as a `DeviceType` value."""
@@ -890,6 +974,10 @@ class ModelInfo(object):
     def __init__(self, data):
         self.data = data
     
+    @property
+    def model_type(self):
+        return self.data['Info']['modelType']
+
     def value_type(self, name):
         if name in self.data['Value']:
             return self.data['Value'][name]['type']
@@ -923,6 +1011,8 @@ class ModelInfo(object):
                     )
         elif d['type'] == 'Boolean':
             return EnumValue({'0': 'False', '1' : 'True'})
+        elif d['type'] == 'String':
+            pass 
         else:
             assert False, "unsupported value type {}".format(d['type'])
 
@@ -1034,7 +1124,7 @@ class Device(object):
         self.client = client
         self.device = device
         self.model = client.model_info(device)
-    
+
     def _set_control(self, key, value):
         """Set a device's control for `key` to `value`.
         """
@@ -1043,7 +1133,17 @@ class Device(object):
             self.device.id,
             {key: value},
             )
-    
+
+    def _set_control_ac_wdirvstep(self, key1, value1, key2, value2, key3, value3):
+        """Set a device's control for `key` to `value`.
+        """
+        
+        self.client.session.set_device_controls(
+            self.device.id,
+            {key1: value1, key2: value2, key3:value3},
+            )
+
+
     def _get_config(self, key):
         """Look up a device's configuration for a given value.
             
@@ -1076,13 +1176,30 @@ class Device(object):
             self.device.id,
         )
 
+    def _get_power_data(self, sDate, eDate):
+        period = 'Day_'+sDate+'T000000Z/'+eDate+'T000000Z'
+        data = self.client.session.get_power_data(
+               self.device.id,
+                period,
+        )
+        return data
+
+    def _get_water_usage(self, typeCode, sDate, eDate):
+        data = self.client.session.get_water_usage(
+               self.device.id,
+                typeCode,
+                sDate,
+                eDate,
+        )
+        return data
+
 """------------------for Air Conditioner"""
 class ACMode(enum.Enum):
     """The operation mode for an AC/HVAC device."""
     
     COOL = "@AC_MAIN_OPERATION_MODE_COOL_W"
     DRY = "@AC_MAIN_OPERATION_MODE_DRY_W"
-    FAN_ONLY = "@AC_MAIN_OPERATION_MODE_FAN_W"
+    FAN = "@AC_MAIN_OPERATION_MODE_FAN_W"
     AI = "@AC_MAIN_OPERATION_MODE_AI_W"
     HEAT = "@AC_MAIN_OPERATION_MODE_HEAT_W"
     AIRCLEAN = "@AC_MAIN_OPERATION_MODE_AIRCLEAN_W"
@@ -1109,6 +1226,13 @@ class ACWindstrength(enum.Enum):
     LEFT_ONLY_LOW = "@AC_MAIN_WIND_STRENGTH_LOW_LEFT_W"
     LEFT_ONLY_MID = "@AC_MAIN_WIND_STRENGTH_MID_LEFT_W"
     LEFT_ONLY_HIGH = "@AC_MAIN_WIND_STRENGTH_HIGH_LEFT_W"
+    SYSTEM_SLOW = "@AC_MAIN_WIND_STRENGTH_SLOW_W"
+    SYSTEM_LOW = "@AC_MAIN_WIND_STRENGTH_LOW_W"
+    SYSTEM_MID = "@AC_MAIN_WIND_STRENGTH_MID_W"
+    SYSTEM_HIGH = "@AC_MAIN_WIND_STRENGTH_HIGH_W"
+    SYSTEM_POWER = "@AC_MAIN_WIND_STRENGTH_POWER_W"
+    SYSTEM_AUTO = "@AC_MAIN_WIND_STRENGTH_AUTO_W"
+    
 
 class ACOp(enum.Enum):
     """Whether a device is on or off."""
@@ -1118,43 +1242,43 @@ class ACOp(enum.Enum):
     LEFT_ON = "@AC_MAIN_OPERATION_LEFT_ON_W"
     ALL_ON = "@AC_MAIN_OPERATION_ALL_ON_W"
 
-class ICEVALLEY(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
-class LONGPOWER(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
-class SMARTCARE(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
 class AIRCLEAN(enum.Enum):
+
     OFF = "@AC_MAIN_AIRCLEAN_OFF_W"
     ON = "@AC_MAIN_AIRCLEAN_ON_W"
 
-class POWERSAVE(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
-class AUTODRY(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
-class POWERSAVEDRY(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
-class WDIRUPDOWN(enum.Enum):
-    OFF = "@OFF"
-    ON = "@ON"
-
 class WDIRLEFTRIGHT(enum.Enum):
+
     LEFT_RIGHT_STOP = "@OFF"
+    LEFT_RIGTH_ON = "@ON"
     RIGHTSIDE_LEFT_RIGHT = "@RIGHT_ON"
     LEFTSIDE_LEFT_RIGHT = "@LEFT_ON"
     LEFT_RIGHT = "@ALL_ON"
+
+class WDIRVSTEP(enum.Enum):
+
+    OFF = "0"
+    FIRST = "1"
+    SECOND = "2"
+    THIRD = "3"
+    FOURTH = "4"
+    FIFTH = "5"
+    SIXTH = "6"
+
+class FOURVAIN_WDIRVSTEP(enum.Enum):
+
+    OFF = "0"
+    FIRST = "8737"
+    SECOND = "8738"
+    THIRD = "8739"
+    FOURTH = "8740"
+    FIFTH = "8741"
+    SIXTH = "8742"
+
+
+class ACETCMODE(enum.Enum):
+    OFF = "@OFF"
+    ON = "@ON" 
 
 class ACDevice(Device):
     """Higher-level operations on an AC/HVAC device, such as a heat
@@ -1205,14 +1329,21 @@ class ACDevice(Device):
         """
         
         self.set_celsius(self.f2c[f])
-    
+
+    def set_on(self, is_on):
+        """Turn on or off the device (according to a boolean).
+        """
+        
+        op = ACOp.ALL_ON if is_on else ACOp.OFF
+        op_value = self.model.enum_value('Operation', op.value)
+        self._set_control('Operation', op_value)
+
     def set_mode(self, mode):
         """Set the device's operating mode to an `OpMode` value.
         """
         
         mode_value = self.model.enum_value('OpMode', mode.value)
         self._set_control('OpMode', mode_value)
-    
     
     def set_windstrength(self, mode):
         """Set the device's operating mode to an `windstrength` value.
@@ -1221,62 +1352,27 @@ class ACDevice(Device):
         windstrength_value = self.model.enum_value('WindStrength', mode.value)
         self._set_control('WindStrength', windstrength_value)
     
-    
-    def set_on(self, is_on):
-        """Turn on or off the device (according to a boolean).
-        """
+    def set_wind_leftright(self, mode):
         
-        op = ACOp.ALL_ON if is_on else ACOp.OFF
-        op_value = self.model.enum_value('Operation', op.value)
-        self._set_control('Operation', op_value)
-    
-    def set_icevalley(self, is_on):
-        
-        mode = ICEVALLEY.ON if is_on else ICEVALLEY.OFF
-        mode_value = self.model.enum_value('IceValley', mode.value)
-        self._set_control('IceValley', mode_value)
-    
-    def set_longpower(self, is_on):
-        
-        mode = LONGPOWER.ON if is_on else LONGPOWER.OFF
-        mode_value = self.model.enum_value('FlowLongPower', mode.value)
-        self._set_control('FlowLongPower', mode_value)
-    
-    def set_smartcare(self, is_on):
-        
-        mode = SMARTCARE.ON if is_on else SMARTCARE.OFF
-        mode_value = self.model.enum_value('SmartCare', mode.value)
-        self._set_control('SmartCare', mode_value)
-    
+        wdir_value = self.model.enum_value('WDirLeftRight', mode.value)
+        self._set_control('WDirLeftRight', wdir_value)
+
+    def set_wdirvstep(self, mode):
+
+        self._set_control_ac_wdirvstep('WDirVStep',int(mode.value), 'PowerSave', 0, 'Jet', 0)
+
     def set_airclean(self, is_on):
         
         mode = AIRCLEAN.ON if is_on else AIRCLEAN.OFF
         mode_value = self.model.enum_value('AirClean', mode.value)
         self._set_control('AirClean', mode_value)
-    
-    def set_powersave(self, is_on):
-        
-        mode = POWERSAVE.ON if is_on else POWERSAVE.OFF
-        mode_value = self.model.enum_value('PowerSave', mode.value)
-        self._set_control('PowerSave', mode_value)
-    
-    def set_autodry(self, is_on):
-        
-        mode = AUTODRY.ON if is_on else AUTODRY.OFF
-        mode_value = self.model.enum_value('AutoDry', mode.value)
-        self._set_control('AutoDry', mode_value)
-    
-    def set_wind_updown(self, is_on):
-        
-        wdir = WDIRUPDOWN.ON if is_on else WDIRUPDOWN.OFF
-        wdir_value = self.model.enum_value('WDirUpDown', wdir.value)
-        self._set_control('WDirUpDown', wdir_value)
-    
-    def set_wind_leftright(self, mode):
-        
-        wdir_value = self.model.enum_value('WDirLeftRight', mode.value)
-        self._set_control('WDirLeftRight', wdir_value)
-    
+
+    def set_etc_mode(self, name, is_on):
+
+        mode = ACETCMODE.ON if is_on else ACETCMODE.OFF
+        mode_value = self.model.enum_value(name, mode.value)
+        self._set_control(name, mode_value)
+
     def get_filter_state(self):
         """Get information about the filter."""
         
@@ -1303,7 +1399,7 @@ class ACDevice(Device):
         
         value = self._get_control('SpkVolume')
         return int(value)
-    
+
     def monitor_start(self):
         """Start monitoring the device's status."""
         
@@ -1317,6 +1413,12 @@ class ACDevice(Device):
     
     def delete_permission(self):
         self._delete_permission()
+
+    def get_energy_usage(self):
+        sDate = '20190101'
+        eDate = '20190131'
+        value = self._get_power_data(sDate, eDate)
+        return value
     
     def poll(self):
         """Poll the device's current state.
@@ -1325,15 +1427,10 @@ class ACDevice(Device):
         either an `ACStatus` object or `None` if the status is not yet
         available.
         """
-        """ 
-        res = self.mon.poll_json()
-        if res:
-            return ACStatus(self, res)
-        """
         data = self.mon.poll()
         if data:
-            """
             res = self.model.decode_monitor(data)
+            """
             with open('/config/wideq/hvac_polled_data.json','w', encoding="utf-8") as dumpfile:
                 json.dump(res, dumpfile, ensure_ascii=False, indent="\t")
             """
@@ -1363,6 +1460,11 @@ class ACStatus(object):
             return int(f)
         else:
             return f
+    
+    @property
+    def is_on(self):
+        op = ACOp(self.lookup_enum('Operation'))
+        return op != ACOp.OFF
 
     @property
     def temp_cur_c(self):
@@ -1382,7 +1484,11 @@ class ACStatus(object):
     
     def lookup_enum(self, key):
         return self.ac.model.enum_name(key, self.data[key])
-    
+
+    @property
+    def model_type(self):
+        return self.ac.model.model_type()
+
     @property
     def mode(self):
         return ACMode(self.lookup_enum('OpMode'))
@@ -1392,42 +1498,57 @@ class ACStatus(object):
         return ACWindstrength(self.lookup_enum('WindStrength'))
     
     @property
-    def wdirupdown_state(self):
-        return WDIRUPDOWN(self.lookup_enum('WDirUpDown'))
-    
-    @property
     def wdirleftright_state(self):
         return WDIRLEFTRIGHT(self.lookup_enum('WDirLeftRight'))
-    
+
     @property
-    def is_on(self):
-        op = ACOp(self.lookup_enum('Operation'))
-        return op != ACOp.OFF
-    
+    def wdirupdown_state(self):
+        return ACETCMODE(self.lookup_enum('WDirUpDown'))    
+
     @property
     def airclean_state(self):
         return AIRCLEAN(self.lookup_enum('AirClean'))
+
+    @property
+    def wdirvstep_state(self):
+        return WDIRVSTEP(self.data['WDirVStep'])
+
+    @property
+    def fourvain_wdirvstep_state(self):
+        return FOURVAIN_WDIRVSTEP(self.data['WDirVStep'])
+
+    @property
+    def sac_airclean_state(self):
+        return ACETCMODE(self.lookup_enum('AirClean'))    
     
     @property
     def icevalley_state(self):
-        return ICEVALLEY(self.lookup_enum('IceValley'))
+        return ACETCMODE(self.lookup_enum('IceValley'))
     
     @property
     def longpower_state(self):
-        return LONGPOWER(self.lookup_enum('FlowLongPower'))
+        return ACETCMODE(self.lookup_enum('FlowLongPower'))
     
     @property
     def autodry_state(self):
-        return AUTODRY(self.lookup_enum('AutoDry'))
+        return ACETCMODE(self.lookup_enum('AutoDry'))
     
     @property
     def smartcare_state(self):
-        return SMARTCARE(self.lookup_enum('SmartCare'))
+        return ACETCMODE(self.lookup_enum('SmartCare'))
+    
+    @property
+    def sensormon_state(self):
+        return ACETCMODE(self.lookup_enum('SensorMon'))
     
     @property
     def powersave_state(self):
-        return POWERSAVE(self.lookup_enum('PowerSave'))
-    
+        return ACETCMODE(self.lookup_enum('PowerSave'))
+
+    @property
+    def jet_state(self):
+        return ACETCMODE(self.lookup_enum('Jet'))
+
     @property
     def humidity(self):
         return self.data['SensorHumidity']
@@ -1443,7 +1564,7 @@ class ACStatus(object):
     @property
     def sensorpm10(self):
         return self.data['SensorPM10']
-    
+
     @property
     def total_air_polution(self):
         return self.data['TotalAirPolution']
@@ -1452,39 +1573,40 @@ class ACStatus(object):
     def air_polution(self):
         return self.data['AirPolution']
 
-
-
 """------------------for Refrigerator"""
 class ICEPLUS(enum.Enum):
-    
+
     OFF = "@CP_OFF_EN_W"
     ON = "@CP_ON_EN_W"
 
 class FRESHAIRFILTER(enum.Enum):
-    
+
     OFF = "@CP_TERM_OFF_KO_W"
     AUTO = "@RE_STATE_FRESH_AIR_FILTER_MODE_AUTO_W"
     POWER = "@RE_STATE_FRESH_AIR_FILTER_MODE_POWER_W"
+    REPLACE_FILTER = "@RE_STATE_REPLACE_FILTER_W"
+    SMARTCARE_ON = "@RE_STATE_SMART_SMART_CARE_ON"
+    SMARTCARE_OFF = "@RE_STATE_SMART_SMART_CARE_OFF"
+    SMARTCARE_WAIT = "@RE_STATE_SMART_SMART_CARE_WAIT"
 
 class SMARTSAVING(enum.Enum):
-    
+
     OFF = "@CP_TERM_USE_NOT_W"
     NIGHT = "@RE_SMARTSAVING_MODE_NIGHT_W"
     CUSTOM = "@RE_SMARTSAVING_MODE_CUSTOM_W"
-
 
 class RefDevice(Device):
     
     def set_reftemp(self, temp):
         """Set the refrigerator temperature.
         """
-        temp_value = self.model.enum_value('TempRefrigerator', temp)
+        temp_value = self.model.enum_value('TempRefrigerator_C', temp)
         self._set_control('RETM', temp_value)
     
     def set_freezertemp(self, temp):
         """Set the freezer temperature.
         """
-        temp_value = self.model.enum_value('TempFreezer', temp)
+        temp_value = self.model.enum_value('TempFreezer_C', temp)
         self._set_control('REFT', temp_value)
     
     def set_iceplus(self, mode):
@@ -1501,6 +1623,9 @@ class RefDevice(Device):
         freshairfilter_value = self.model.enum_value('FreshAirFilter', mode.value)
         self._set_control('REHF', freshairfilter_value)
     
+    def set_activesaving(self, value):
+        self._set_control('REAS', value)
+
     def monitor_start(self):
         """Start monitoring the device's status."""
         
@@ -1525,8 +1650,8 @@ class RefDevice(Device):
         
         data = self.mon.poll()
         if data:
-            """
             res = self.model.decode_monitor(data)
+            """
             with open('/config/wideq/ref_polled_data.json','w', encoding="utf-8") as dumpfile:
                 json.dump(res, dumpfile, ensure_ascii=False, indent="\t")
             """
@@ -1548,13 +1673,23 @@ class RefStatus(object):
     def lookup_enum(self, key):
         return self.ref.model.enum_name(key, self.data[key])
     
+    def lookup_enum_temp(self, key, value):
+        return self.ref.model.enum_name(key, value)
+        
     @property
     def current_reftemp(self):
-        return self.lookup_enum('TempRefrigerator')
-    
+        temp = self.lookup_enum('TempRefrigerator')
+        return self.lookup_enum_temp('TempRefrigerator_C', temp)
+
+    @property
+    def current_midtemp(self):
+        temp = self.lookup_enum('TempMiddle')
+        return self.lookup_enum_temp('TempMiddle_C', temp)
+
     @property
     def current_freezertemp(self):
-        return self.lookup_enum('TempFreezer')
+        temp = self.lookup_enum('TempFreezer')
+        return self.lookup_enum_temp('TempFreezer_C', temp)
     
     @property
     def iceplus_state(self):
@@ -1570,7 +1705,12 @@ class RefStatus(object):
     
     @property
     def waterfilter_state(self):
-        return self.data['WaterFilterUsedMonth']
+        try:
+            waterfilter = self.lookup_enum('WaterFilterUsedMonth')
+        except AttributeError:
+            return self.data['WaterFilterUsedMonth']
+        if waterfilter:
+            return waterfilter
     
     @property
     def door_state(self):
@@ -1662,8 +1802,8 @@ class DryerDevice(Device):
         
         data = self.mon.poll()
         if data:
-            """
             res = self.model.decode_monitor(data)
+            """
             with open('/config/wideq/dryer_polled_data.json','w', encoding="utf-8") as dumpfile:
                 json.dump(res, dumpfile, ensure_ascii=False, indent="\t")
             """
@@ -1696,7 +1836,6 @@ class DryerStatus(object):
             return 'OFF'
         else:
             return 'ON'
-
 
     @property
     def is_on(self):
@@ -1925,8 +2064,8 @@ class WasherDevice(Device):
         
         data = self.mon.poll()
         if data:
-            """
             res = self.model.decode_monitor(data)
+            """
             with open('/config/wideq/washer_polled_data.json','w', encoding="utf-8") as dumpfile:
                 json.dump(res, dumpfile, ensure_ascii=False, indent="\t")
             """
@@ -2077,3 +2216,244 @@ class WasherStatus(object):
     @property
     def load_level(self):
         return self.lookup_enum('LoadLevel')
+
+
+"""------------------for Dehumidifier"""
+class DEHUMOperation(enum.Enum):
+    
+    ON = "@operation_on"
+    OFF = "@operation_off"
+
+class DEHUMOPMode(enum.Enum):
+    
+    SMART_DEHUM = "@AP_MAIN_MID_OPMODE_SMART_DEHUM_W"
+    FAST_DEHUM = "@AP_MAIN_MID_OPMODE_FAST_DEHUM_W"
+    SILENT_DEHUM = "@AP_MAIN_MID_OPMODE_CILENT_DEHUM_W"
+    CONCENTRATION_DRY = "@AP_MAIN_MID_OPMODE_CONCENTRATION_DRY_W"
+    CLOTHING_DRY = "@AP_MAIN_MID_OPMODE_CLOTHING_DRY_W"
+    IONIZER = "@AP_MAIN_MID_OPMODE_IONIZER_W"
+
+class DEHUMWindStrength(enum.Enum):
+
+    LOW = "@AP_MAIN_MID_WINDSTRENGTH_DHUM_LOW_W"
+    HIGH = "@AP_MAIN_MID_WINDSTRENGTH_DHUM_HIGH_W"
+
+class DEHUMAIRREMOVAL(enum.Enum):
+
+    OFF = "@AP_OFF_W"
+    ON = "@AP_ON_W"
+
+class DIAGCODE(enum.Enum):
+
+    FAN_ERROR = "@ERROR_FAN"
+    NORMAL = "@NORMAL"
+    EEPROM_ERROR = "@ERROR_EEPROM"
+
+class DehumDevice(Device):
+
+
+    def set_on(self, is_on):
+        mode = DEHUMOperation.ON if is_on else DEHUMOperation.OFF
+        mode_value = self.model.enum_value('Operation', mode.value)
+        self._set_control('Operation', mode_value)
+            
+    def set_mode(self, mode):
+        
+        mode_value = self.model.enum_value('OpMode', mode.value)
+        self._set_control('OpMode', mode_value)
+
+    def set_humidity(self, hum):
+        """Set the device's target temperature in Celsius degrees.
+        """
+        self._set_control('HumidityCfg', hum)
+    
+    def set_windstrength(self, mode):
+
+        windstrength_value = self.model.enum_value('WindStrength', mode.value)
+        self._set_control('WindStrength', windstrength_value)
+    
+    def set_airremoval(self, is_on):
+        
+        mode = DEHUMAIRREMOVAL.ON if is_on else DEHUMAIRREMOVAL.OFF
+        mode_value = self.model.enum_value('AirRemoval', mode.value)
+        self._set_control('AirRemoval', mode_value)
+
+    def monitor_start(self):
+        """Start monitoring the device's status."""
+        
+        self.mon = Monitor(self.client.session, self.device.id)
+        self.mon.start()
+    
+    def monitor_stop(self):
+        """Stop monitoring the device's status."""
+        
+        self.mon.stop()
+    
+    def delete_permission(self):
+        self._delete_permission()
+    
+    def poll(self):
+        """Poll the device's current state.
+            
+        Monitoring must be started first with `monitor_start`. Return
+        either an `ACStatus` object or `None` if the status is not yet
+        available.
+        """
+        data = self.mon.poll()
+        if data:
+            res = self.model.decode_monitor(data)
+            """
+            with open('/config/wideq/dehumidifier_polled_data.json','w', encoding="utf-8") as dumpfile:
+                json.dump(res, dumpfile, ensure_ascii=False, indent="\t")
+            """
+            return DEHUMStatus(self, res)
+        else:
+            return None     
+
+class DEHUMStatus(object):
+    """Higher-level information about an AC device's current status.
+    """
+    
+    def __init__(self, dehum, data):
+        self.dehum = dehum
+        self.data = data
+
+
+    def lookup_enum(self, key):
+        return self.dehum.model.enum_name(key, self.data[key])
+
+    @property
+    def is_on(self):
+        op = DEHUMOperation(self.lookup_enum('Operation'))
+        return op == DEHUMOperation.ON
+
+    @property
+    def mode(self):
+        return DEHUMOPMode(self.lookup_enum('OpMode'))
+   
+    @property
+    def windstrength_state(self):
+        return DEHUMWindStrength(self.lookup_enum('WindStrength'))
+    
+    @property
+    def airremoval_state(self):
+        return DEHUMAIRREMOVAL(self.lookup_enum('AirRemoval'))
+    
+    @property
+    def current_humidity(self):
+        return self.data['SensorHumidity']
+    
+    @property
+    def target_humidity(self):
+        return self.data['HumidityCfg']
+
+
+"""------------------for Water Purifier"""
+class COCKCLEAN(enum.Enum):
+
+    WAITING = "@WP_WAITING_W"
+    COCKCLEANING = "@WP_COCK_CLEANING_W"
+
+class WPDevice(Device):
+
+    def day_water_usage(self, watertype):
+        typeCode = 'DAY'
+
+        sDate = datetime.today().strftime("%Y%m%d")
+
+        res = self._get_water_usage(typeCode, sDate, sDate)
+        data = res['itemDetail']
+        for usage_data in data:
+            if usage_data['waterType'] == watertype:
+                return usage_data['waterAmount']
+
+    def week_water_usage(self, watertype):
+        typeCode = 'WEEK'
+        
+        amount = 0
+        weekday = datetime.today().weekday()
+
+        startdate = datetime.today() + timedelta(days=-(weekday+1))
+        enddate = datetime.today() + timedelta(days=(6-(weekday+1)))
+        sDate = datetime.date(startdate).strftime("%Y%m%d")
+        eDate = datetime.date(enddate).strftime("%Y%m%d")
+
+        res = self._get_water_usage(typeCode, sDate, eDate)
+        for weekdata in res:
+            for usage_data in weekdata['itemDetail']:
+                if usage_data['waterType'] == watertype:
+                    amount = amount + int(usage_data['waterAmount'])
+        return amount
+
+    def month_water_usage(self, watertype):
+        typeCode = 'MONTH'
+
+        startdate = datetime.today().replace(day=1)
+        sDate = datetime.date(startdate).strftime("%Y%m%d")
+        eDate = datetime.today().strftime("%Y%m%d")
+
+        res = self._get_water_usage(typeCode, sDate, eDate)
+        data = res['itemDetail']
+        for usage_data in data:
+            if usage_data['waterType'] == watertype:
+                return usage_data['waterAmount']
+
+
+    def year_water_usage(self, watertype):
+        typeCode = 'YEAR'
+
+        startdate = datetime.today().replace(month=1, day=1)
+        sDate = datetime.date(startdate).strftime("%Y%m%d")
+        eDate = datetime.today().strftime("%Y%m%d")
+
+        res = self._get_water_usage(typeCode, sDate, eDate)
+        data = res['itemDetail']
+        for usage_data in data:
+            if usage_data['waterType'] == watertype:
+                return usage_data['waterAmount']
+
+
+    def monitor_start(self):
+        """Start monitoring the device's status."""
+        
+        self.mon = Monitor(self.client.session, self.device.id)
+        self.mon.start()
+    
+    def monitor_stop(self):
+        """Stop monitoring the device's status."""
+        
+        self.mon.stop()
+    
+    def delete_permission(self):
+        self._delete_permission()
+    
+    def poll(self):
+        """Poll the device's current state.
+            
+        Monitoring must be started first with `monitor_start`. Return
+        either an `ACStatus` object or `None` if the status is not yet
+        available.
+        """
+        data = self.mon.poll()
+        if data:
+            res = self.model.decode_monitor(data)
+            """
+            with open('/config/wideq/waterpurifier_polled_data.json','w', encoding="utf-8") as dumpfile:
+                json.dump(cockclean, dumpfile, ensure_ascii=False, indent="\t")
+            """
+            return WPStatus(self, res)
+        else:
+            return None
+
+class WPStatus(object):
+    
+    def __init__(self, wp, data):
+        self.wp = wp
+        self.data = data
+
+    def lookup_enum(self, key):
+        return self.wp.model.enum_name(key, self.data[key])
+
+    @property
+    def cockclean_state(self):
+        return COCKCLEAN(self.lookup_enum('CockClean'))
