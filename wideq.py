@@ -85,6 +85,9 @@ STATE_WDIRVSTEP_SIXTH = '6단계'
 STATE_ICE_PLUS = 'ON'
 STATE_ICE_PLUS_OFF = 'OFF'
 
+STATE_ECO_FRIENDLY = 'ON'
+STATE_ECO_FRIENDLY_OFF = 'OFF'
+
 STATE_FRESH_AIR_FILTER_REPLACE_FILTER = '필터교체필요'
 STATE_FRESH_AIR_FILTER_SMART_CARE_ON = '켜짐'
 STATE_FRESH_AIR_FILTER_SMART_CARE_OFF = '꺼짐'
@@ -176,27 +179,30 @@ STATE_OPTIONITEM_ON  = "Optionitem on"
 STATE_OPTIONITEM_OFF  = "Optionitem off"
 
 """WASHER STATE"""
-STATE_WASHER_POWER_OFF  = "Washer power off"
-STATE_WASHER_INITIAL  = "Washer initial"
-STATE_WASHER_PAUSE  = "Washer pause"
-STATE_WASHER_ERROR_AUTO_OFF  = "Washer error auto off"
-STATE_WASHER_RESERVE  = "Washer reserve"
-STATE_WASHER_DETECTING  = "Washer detecting"
-STATE_WASHER_ADD_DRAIN  = "Washer add drain"
-STATE_WASHER_DETERGENT_AMOUT  = "Washer detergent amout"
-STATE_WASHER_RUNNING  = "Washer running"
-STATE_WASHER_PREWASH  = "Washer prewash"
-STATE_WASHER_RINSING  = "Washer rinsing"
-STATE_WASHER_RINSE_HOLD  = "Washer rinse hold"
-STATE_WASHER_SPINNING  = "Washer spinning"
-STATE_WASHER_DRYING  = "Washer drying"
-STATE_WASHER_END  = "Washer end"
-STATE_WASHER_FRESHCARE  = "Washer freshcare"
-STATE_WASHER_TCL_ALARM_NORMAL  = "Washer tcl alarm normal"
-STATE_WASHER_FROZEN_PREVENT_INITIAL  = "Washer frozen prevent initial"
-STATE_WASHER_FROZEN_PREVENT_RUNNING  = "Washer frozen prevent running"
-STATE_WASHER_FROZEN_PREVENT_PAUSE  = "Washer frozen prevent pause"
-STATE_WASHER_ERROR  = "Washer error"
+STATE_WASHER_POWER_OFF = 'Off'
+STATE_WASHER_INITIAL = 'Select Course'
+STATE_WASHER_PAUSE = 'Paused'
+STATE_WASHER_ERROR_AUTO_OFF = 'Automatic Poweroff Error'
+STATE_WASHER_RESERVE = 'Reserved'
+STATE_WASHER_DETECTING = 'Detecting'
+STATE_WASHER_ADD_DRAIN = 'ADD_DRAIN'
+STATE_WASHER_DETERGENT_AMOUT = 'Detergent Amount'
+STATE_WASHER_RUNNING = 'Washing'
+STATE_WASHER_PREWASH = 'Pre-Wash'
+STATE_WASHER_RINSING = 'Rinsing'
+STATE_WASHER_RINSE_HOLD = 'Rinsing [On Hold]'
+STATE_WASHER_SPINNING = 'Spinning'
+STATE_WASHER_DRYING = 'Drying'
+STATE_WASHER_END = 'End'
+STATE_WASHER_REFRESHWITHSTEAM = 'Refreshing with steam'
+STATE_WASHER_COOLDOWN = 'Cooldown'
+STATE_WASHER_STEAMSOFTENING = 'Using softener with steam'
+STATE_WASHER_ERRORSTATE = 'An error occured'
+STATE_WASHER_TCL_ALARM_NORMAL = 'Pipe Clogged'
+STATE_WASHER_FROZEN_PREVENT_INITIAL = 'Error during initialization'
+STATE_WASHER_FROZEN_PREVENT_RUNNING = 'Unfreezing system, please wait'
+STATE_WASHER_FROZEN_PREVENT_PAUSE = 'System is being unfrozen, you cannot pause this operation.'
+STATE_WASHER_ERROR = 'Error'
 
 STATE_WASHER_SOILLEVEL_LIGHT  = "Washer soillevel light"
 STATE_WASHER_SOILLEVEL_NORMAL  = "Washer soillevel normal"
@@ -204,17 +210,19 @@ STATE_WASHER_SOILLEVEL_HEAVY  = "Washer soillevel heavy"
 STATE_WASHER_SOILLEVEL_PRE_WASH  = "Washer soillevel pre wash"
 STATE_WASHER_SOILLEVEL_SOAKING  = "Washer soillevel soaking"
 
-STATE_WASHER_WATERTEMP_COLD  = "Washer watertemp cold"
+STATE_WASHER_WATERTEMP_COLD = 'Cold'
+STATE_WASHER_WATERTEMP_20 = '20℃'
 STATE_WASHER_WATERTEMP_30 = '30℃'
 STATE_WASHER_WATERTEMP_40 = '40℃'
 STATE_WASHER_WATERTEMP_60 = '60℃'
 STATE_WASHER_WATERTEMP_95 = '95℃'
 
-STATE_WASHER_SPINSPEED_EXTRA_LOW  = "Washer spinspeed extra low"
-STATE_WASHER_SPINSPEED_LOW  = "Washer spinspeed low"
-STATE_WASHER_SPINSPEED_MEDIUM  = "Washer spinspeed medium"
-STATE_WASHER_SPINSPEED_HIGH  = "Washer spinspeed high"
-STATE_WASHER_SPINSPEED_EXTRA_HIGH  = "Washer spinspeed extra high"
+STATE_WASHER_SPINSPEED_NOSPIN = 'No Spin'
+STATE_WASHER_SPINSPEED_400 = '400 RPM'
+STATE_WASHER_SPINSPEED_800 = '800 RPM'
+STATE_WASHER_SPINSPEED_1000 = '1000 RPM'
+STATE_WASHER_SPINSPEED_1200 = '1200 RPM'
+STATE_WASHER_SPINSPEED_1400 = '1400 RPM'
 
 STATE_WASHER_RINSECOUNT_1  = "Washer rinsecount 1"
 STATE_WASHER_RINSECOUNT_2  = "Washer rinsecount 2"
@@ -230,24 +238,25 @@ STATE_WASHER_DRYLEVEL_TIME_90  = "Washer drylevel time 90"
 STATE_WASHER_DRYLEVEL_TIME_120  = "Washer drylevel time 120"
 STATE_WASHER_DRYLEVEL_TIME_150  = "Washer drylevel time 150"
 
-STATE_WASHER_NO_ERROR  = "Washer no error"
-STATE_WASHER_ERROR_dE2  = "Washer error de2"
-STATE_WASHER_ERROR_IE  = "Washer error ie"
-STATE_WASHER_ERROR_OE  = "Washer error oe"
-STATE_WASHER_ERROR_UE  = "Washer error ue"
-STATE_WASHER_ERROR_FE  = "Washer error fe"
-STATE_WASHER_ERROR_PE  = "Washer error pe"
-STATE_WASHER_ERROR_LE  = "Washer error le"
-STATE_WASHER_ERROR_tE  = "Washer error te"
-STATE_WASHER_ERROR_dHE  = "Washer error dhe"
-STATE_WASHER_ERROR_CE  = "Washer error ce"
-STATE_WASHER_ERROR_PF  = "Washer error pf"
-STATE_WASHER_ERROR_FF  = "Washer error ff"
-STATE_WASHER_ERROR_dCE  = "Washer error dce"
-STATE_WASHER_ERROR_EE  = "Washer error ee"
-STATE_WASHER_ERROR_PS  = "Washer error ps"
-STATE_WASHER_ERROR_dE1  = "Washer error de1"
-STATE_WASHER_ERROR_LOE  = "Washer error loe"
+STATE_WASHER_NO_ERROR = 'Normal'
+STATE_WASHER_ERROR_dE2 = 'Door open - Please close the door'
+STATE_WASHER_ERROR_IE = 'No water - Please make sure the water has enough pressure to reach the washer.'
+STATE_WASHER_ERROR_OE = 'Drain error - Please make sure the pipe is not clogged/frozen'
+STATE_WASHER_ERROR_UE = 'Laundry trim'
+STATE_WASHER_ERROR_FE = 'FE - Contact Service Center'
+STATE_WASHER_ERROR_PE = 'PE - Contact Service Center'
+STATE_WASHER_ERROR_LE = 'LE - Contact Service Center'
+STATE_WASHER_ERROR_tE = 'tE - Contact Service Center'
+STATE_WASHER_ERROR_dHE = 'dHE - Contact Service Center'
+STATE_WASHER_ERROR_CE = 'CE - Contact Service Center'
+STATE_WASHER_ERROR_PF = 'PF - Contact Service Center'
+STATE_WASHER_ERROR_FF = 'The washer is frozen, please warm up the surrounding area.'
+STATE_WASHER_ERROR_dCE = 'dCE - Contact Service Center'
+STATE_WASHER_ERROR_EE = 'EE - Contact Service Center'
+STATE_WASHER_ERROR_PS = 'PS - Contact Service Center'
+STATE_WASHER_ERROR_dE1 = 'Door open - Please close the door'
+STATE_WASHER_ERROR_LOE = 'Detergent door is open - Please close the detergent door'
+STATE_NO_ERROR = 'Normal'
 
 STATE_WASHER_APCOURSE_COTTON  = "Washer apcourse cotton"
 STATE_WASHER_APCOURSE_SPEEDWASH_DRY  = "Washer apcourse speedwash dry"
@@ -266,23 +275,23 @@ STATE_WASHER_APCOURSE_COLDWASH  = "Washer apcourse coldwash"
 STATE_WASHER_APCOURSE_TUBCLEAN_SANITARY  = "Washer apcourse tubclean sanitary"
 STATE_WASHER_APCOURSE_DOWNLOAD_COUSE  = "Washer apcourse download couse"
 
-STATE_WASHER_SMARTCOURSE_SILENT  = "Washer smartcourse silent"
-STATE_WASHER_SMARTCOURSE_SMALL_LOAD  = "Washer smartcourse small load"
-STATE_WASHER_SMARTCOURSE_SKIN_CARE  = "Washer smartcourse skin care"
-STATE_WASHER_SMARTCOURSE_RAINY_SEASON  = "Washer smartcourse rainy season"
-STATE_WASHER_SMARTCOURSE_SWEAT_STAIN  = "Washer smartcourse sweat stain"
-STATE_WASHER_SMARTCOURSE_SINGLE_GARMENT  = "Washer smartcourse single garment"
-STATE_WASHER_SMARTCOURSE_SCHOOL_UNIFORM  = "Washer smartcourse school uniform"
-STATE_WASHER_SMARTCOURSE_STATIC_REMOVAL  = "Washer smartcourse static removal"
-STATE_WASHER_SMARTCOURSE_COLOR_CARE  = "Washer smartcourse color care"
-STATE_WASHER_SMARTCOURSE_SPIN_ONLY  = "Washer smartcourse spin only"
-STATE_WASHER_SMARTCOURSE_DEODORIZATION  = "Washer smartcourse deodorization"
-STATE_WASHER_SMARTCOURSE_BEDDING_CARE  = "Washer smartcourse bedding care"
-STATE_WASHER_SMARTCOURSE_CLOTH_CARE  = "Washer smartcourse cloth care"
-STATE_WASHER_SMARTCOURSE_SMART_RINSE  = "Washer smartcourse smart rinse"
-STATE_WASHER_SMARTCOURSE_ECO_WASH  = "Washer smartcourse eco wash"
+STATE_WASHER_SMARTCOURSE_SILENT = 'Silent'
+STATE_WASHER_SMARTCOURSE_SMALL_LOAD = 'Small Load'
+STATE_WASHER_SMARTCOURSE_SKIN_CARE = 'Skin Care'
+STATE_WASHER_SMARTCOURSE_RAINY_SEASON = 'Rainy Season'
+STATE_WASHER_SMARTCOURSE_SWEAT_STAIN = 'Sweat/Stains Removal'
+STATE_WASHER_SMARTCOURSE_SINGLE_GARMENT = 'Single Garment'
+STATE_WASHER_SMARTCOURSE_SCHOOL_UNIFORM = 'School Uniform'
+STATE_WASHER_SMARTCOURSE_STATIC_REMOVAL = 'Static Removal'
+STATE_WASHER_SMARTCOURSE_COLOR_CARE = 'Color Care'
+STATE_WASHER_SMARTCOURSE_SPIN_ONLY = 'Spin Only'
+STATE_WASHER_SMARTCOURSE_DEODORIZATION = 'Deodorization'
+STATE_WASHER_SMARTCOURSE_BEDDING_CARE = 'Bedding Care'
+STATE_WASHER_SMARTCOURSE_CLOTH_CARE = 'Cloth Care'
+STATE_WASHER_SMARTCOURSE_SMART_RINSE = 'Smart Rinse'
+STATE_WASHER_SMARTCOURSE_ECO_WASH = 'Economy Wash'
 
-STATE_WASHER_TERM_NO_SELECT  = "Washer term no select"
+STATE_WASHER_TERM_NO_SELECT = 'Nothing selected yet'
 
 STATE_WASHER_OPTIONITEM_ON  = "Washer optionitem on"
 STATE_WASHER_OPTIONITEM_OFF  = "Washer optionitem off"
@@ -1613,13 +1622,13 @@ class RefDevice(Device):
     def set_reftemp(self, temp):
         """Set the refrigerator temperature.
         """
-        temp_value = self.model.enum_value('TempRefrigerator_C', temp)
+        temp_value = self.model.enum_value('TempRefrigerator', temp)
         self._set_control('RETM', temp_value)
     
     def set_freezertemp(self, temp):
         """Set the freezer temperature.
         """
-        temp_value = self.model.enum_value('TempFreezer_C', temp)
+        temp_value = self.model.enum_value('TempFreezer', temp)
         self._set_control('REFT', temp_value)
     
     def set_iceplus(self, mode):
@@ -1628,6 +1637,13 @@ class RefDevice(Device):
         
         iceplus_value = self.model.enum_value('IcePlus', mode.value)
         self._set_control('REIP', iceplus_value)
+    
+    def set_ecofriendly(self, mode):
+        """Set the device's operating mode to an `ecofriendly` value.
+        """
+        
+        ecofriendly_value = self.model.enum_value('EcoFriendly', mode.value)
+        self._set_control('REEF', ecofriendly_value)
     
     def set_freshairfilter(self, mode):
         """Set the device's operating mode to an `freshairfilter` value.
@@ -1978,11 +1994,14 @@ class WASHERSTATE(enum.Enum):
     RUNNING = "@WM_STATE_RUNNING_W"
     PREWASH = "@WM_STATE_PREWASH_W"
     RINSING = "@WM_STATE_RINSING_W"
-    RINSE_HOLD = "@WM_STATE_RINSE_HOLD_W"
+    RINSE_HOLD = "@WM_STATE_RINSEHOLD_W"
     SPINNING = "@WM_STATE_SPINNING_W"
     DRYING = "@WM_STATE_DRYING_W"
     END = "@WM_STATE_END_W"
-    FRESHCARE = "@WM_STATE_FRESHCARE_W"
+    REFRESHWITHSTEAM = "@WM_STATE_REFRESHING_W"
+    STEAMSOFTENING = "@WM_STATE_STEAMSOFTENING_W"
+    COOLDOWN = "@WM_STATE_COOLDOWN_W"
+    ERRORSTATE = "@WM_STATE_ERROR_W"
     TCL_ALARM_NORMAL = "TCL_ALARM_NORMAL"
     FROZEN_PREVENT_INITIAL = "@WM_STATE_FROZEN_PREVENT_INITIAL_W"
     FROZEN_PREVENT_RUNNING = "@WM_STATE_FROZEN_PREVENT_RUNNING_W"
@@ -1998,64 +2017,77 @@ class WASHERSOILLEVEL(enum.Enum):
     PRE_WASH = "@WM_KR_TT27_WD_WIFI_OPTION_SOILLEVEL_PRE_WASH_W"
     SOAKING = "@WM_KR_TT27_WD_WIFI_OPTION_SOILLEVEL_SOAKING_W"
     
+class WASHERMODE(enum.Enum):
+    TURBO = "@WM_TITAN2_OPTION_TURBO_WASH_W"
+    TIMESAVE = "@WM_TITAN2_OPTION_WASH_TIMESAVE_W"
+    NORMAL = "@WM_TITAN2_OPTION_WASH_NORMAL_W"
+    INTENSIVE = "@WM_TITAN2_OPTION_WASH_INTENSIVE_W"
+    
 class WASHERWATERTEMP(enum.Enum):
     
     NO_SELECT = "@WM_TERM_NO_SELECT_W"
-    COLD = "@WM_KR_TT27_WD_WIFI_OPTION_WATERTEMP_COLD_W"
-    THIRTY = "@WM_KR_TT27_WD_WIFI_OPTION_WATERTEMP_30_W"
-    FOURTY = "@WM_KR_TT27_WD_WIFI_OPTION_WATERTEMP_40_W"
-    SIXTY = "@WM_KR_TT27_WD_WIFI_OPTION_WATERTEMP_60_W"
-    NINTYFIVE = "@WM_KR_TT27_WD_WIFI_OPTION_WATERTEMP_95_W"
+    COLD = "@WM_TITAN2_OPTION_TEMP_COLD_W"
+    TWENTY = "@WM_TITAN2_OPTION_TEMP_20_W"
+    THIRTY = "@WM_TITAN2_OPTION_TEMP_30_W"
+    FOURTY = "@WM_TITAN2_OPTION_TEMP_40_W"
+    FIFTY = "@WM_TITAN2_OPTION_TEMP_50_W"
+    SIXTY = "@WM_TITAN2_OPTION_TEMP_60_W"
+    NINTYFIVE = "@WM_TITAN2_OPTION_TEMP_95_W"
 
 class WASHERSPINSPEED(enum.Enum):
     
-    NO_SELECT = "@WM_TERM_NO_SELECT_W"
-    EXTRA_LOW = "@WM_KR_TT27_WD_WIFI_OPTION_SPINSPEED_EXTRA_LOW_W"
-    LOW = "@WM_KR_TT27_WD_WIFI_OPTION_SPINSPEED_LOW_W"
-    MEDIUM = "@WM_KR_TT27_WD_WIFI_OPTION_SPINSPEED_MEDIUM_W"
-    HIGH = "@WM_KR_TT27_WD_WIFI_OPTION_SPINSPEED_HIGH_W"
-    EXTRA_HIGH = "@WM_KR_TT27_WD_WIFI_OPTION_SPINSPEED_EXTRA_HIGH_W"
+    NOSPIN = "@WM_TITAN2_OPTION_SPIN_NO_SPIN_W"
+    SPIN_400 = "@WM_TITAN2_OPTION_SPIN_400_W"
+    SPIN_800 = "@WM_TITAN2_OPTION_SPIN_800_W"
+    SPIN_1000 = "@WM_TITAN2_OPTION_SPIN_1000_W"
+    SPIN_1200 = "@WM_TITAN2_OPTION_SPIN_1200_W"
+    SPIN_1400 = "@WM_TITAN2_OPTION_SPIN_1400_W"
 
 class WASHERRINSECOUNT(enum.Enum):
     
     NO_SELECT = "@WM_TERM_NO_SELECT_W"
-    ONE = "@WM_KR_TT27_WD_WIFI_OPTION_RINSECOUNT_1_W"
-    TWO = "@WM_KR_TT27_WD_WIFI_OPTION_RINSECOUNT_2_W"
-    THREE = "@WM_KR_TT27_WD_WIFI_OPTION_RINSECOUNT_3_W"
-    FOUR = "@WM_KR_TT27_WD_WIFI_OPTION_RINSECOUNT_4_W"
-    FIVE = "@WM_KR_TT27_WD_WIFI_OPTION_RINSECOUNT_5_W"
+    ONE = "@WM_TITAN2_OPTION_RINSE_NORMAL_W"
+    TWO = "@WM_TITAN2_OPTION_RINSE_RINSE+_W"
+    THREE = "@WM_TITAN2_OPTION_RINSE_RINSE++_W"
+    FOUR = "@WM_TITAN2_OPTION_RINSE_NORMALHOLD_W"
+    FIVE = "@WM_TITAN2_OPTION_RINSE_RINSE+HOLD_W"
 
 class WASHERDRYLEVEL(enum.Enum):
     
-    NO_SELECT = "@WM_TERM_NO_SELECT_W"
-    WIND = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_WIND_W"
-    TURBO = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_TURBO_W"
-    TIME_30 = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_TIME_30_W"
-    TIME_60 = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_TIME_60_W"
-    TIME_90 = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_TIME_90_W"
-    TIME_120 = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_TIME_120_W"
-    TIME_150 = "@WM_KR_TT27_WD_WIFI_OPTION_DRYLEVEL_TIME_150_W"
+    NO_SELECT = "-"
+    NORMAL = "@WM_TITAN2_OPTION_DRY_NORMAL_W"
+    ECO = "@WM_TITAN2_OPTION_DRY_ECO_W"
+    TIME_30 = "@WM_TITAN2_OPTION_DRY_30_W"
+    TIME_60 = "@WM_TITAN2_OPTION_DRY_60_W"
+    TIME_90 = "@WM_TITAN2_OPTION_DRY_90_W"
+    TIME_120 = "@WM_TITAN2_OPTION_DRY_120_W"
+    TIME_150 = "@WM_TITAN2_OPTION_DRY_150_W"
+    VERY_DRY = "@WM_TITAN2_OPTION_DRY_VERY_W"
+    IRON_DRY = "@WM_TITAN2_OPTION_DRY_IRON_W"
+    LOW_DRY = "@WM_TITAN2_OPTION_DRY_LOW_W"
+    ENERGY_DRY = "@WM_TITAN2_OPTION_DRY_ENERGY_W"
+    COOLING = "@WM_TITAN2_OPTION_DRY_COOLING_W"
+    SPEED = "@WM_TITAN2_OPTION_DRY_SPEED_W"
 
 class WASHERERROR(enum.Enum):
     
-    ERROR_dE2 = "@WM_KR_TT27_WD_WIFI_ERROR_DE2"
-    ERROR_IE = "@WM_KR_TT27_WD_WIFI_ERROR_IE"
-    ERROR_OE = "@WM_KR_TT27_WD_WIFI_ERROR_OE"
-    ERROR_UE = "@WM_KR_TT27_WD_WIFI_ERROR_UE"
-    ERROR_FE = "@WM_KR_TT27_WD_WIFI_ERROR_FE"
-    ERROR_PE = "@WM_KR_TT27_WD_WIFI_ERROR_PE"
-    ERROR_tE = "@WM_KR_TT27_WD_WIFI_ERROR_TE"
-    ERROR_LE = "@WM_KR_TT27_WD_WIFI_ERROR_LE"
-    ERROR_CE = "@WM_KR_TT27_WD_WIFI_ERROR_CE"
-    ERROR_dHE = "@WM_KR_TT27_WD_WIFI_ERROR_DHE"
-    ERROR_PF = "@WM_KR_TT27_WD_WIFI_ERROR_PF"
-    ERROR_FF = "@WM_KR_TT27_WD_WIFI_ERROR_FF"
-    ERROR_dCE = "@WM_KR_TT27_WD_WIFI_ERROR_DCE"
-    ERROR_EE = "@WM_KR_TT27_WD_WIFI_ERROR_EE"
-    ERROR_PS = "@WM_KR_TT27_WD_WIFI_ERROR_PS"
-    ERROR_dE1 = "@WM_KR_TT27_WD_WIFI_ERROR_DE1"
-    ERROR_LOE = "@WM_KR_TT27_WD_WIFI_ERROR_LOE"
-
+    ERROR_dE2 = "@WM_WW_FL_ERROR_DE2_W"
+    ERROR_IE = "@WM_WW_FL_ERROR_IE_W"
+    ERROR_OE = "@WM_WW_FL_ERROR_OE_W"
+    ERROR_UE = "@WM_WW_FL_ERROR_UE_W"
+    ERROR_FE = "@WM_WW_FL_ERROR_FE_W"
+    ERROR_PE = "@WM_WW_FL_ERROR_PE_W"
+    ERROR_tE = "@WM_WW_FL_ERROR_TE_W"
+    ERROR_LE = "@WM_WW_FL_ERROR_LE_W"
+    ERROR_CE = "@WM_WW_FL_ERROR_CE_W"
+    ERROR_dHE = "@WM_WW_FL_ERROR_DHE_W"
+    ERROR_PF = "@WM_WW_FL_ERROR_PF_W"
+    ERROR_FF = "@WM_WW_FL_ERROR_FF_W"
+    ERROR_dCE = "@WM_WW_FL_ERROR_DCE_W"
+    ERROR_EE = "@WM_WW_FL_ERROR_EE_W"
+    ERROR_PS = "@WM_WW_FL_ERROR_PS_W"
+    ERROR_dE1 = "@WM_WW_FL_ERROR_DE1_W"
+    ERROR_LOE = "@WM_WW_FL_ERROR_LOE_W"
 
 class WasherDevice(Device):
     
@@ -2153,7 +2185,7 @@ class WasherStatus(object):
 
     @property
     def current_course(self):
-        course = self.lookup_reference('APCourse')
+        course = self.lookup_reference('Course')
         if course == '-':
             return 'OFF'
         else:
@@ -2168,13 +2200,6 @@ class WasherStatus(object):
             return 'NO_ERROR'
         else:
             return WASHERERROR(error)
-
-    @property
-    def wash_option_state(self):
-        soillevel = self.lookup_enum('SoilLevel')
-        if soillevel == '-':
-            return 'OFF'
-        return WASHERSOILLEVEL(soillevel)
     
     @property
     def spin_option_state(self):
@@ -2189,20 +2214,6 @@ class WasherStatus(object):
         if water_temp == '-':
             return 'OFF'
         return WASHERWATERTEMP(water_temp)
-
-    @property
-    def rinsecount_option_state(self):
-        rinsecount = self.lookup_enum('RinseCount')
-        if rinsecount == '-':
-            return 'OFF'
-        return WASHERRINSECOUNT(rinsecount)
-
-    @property
-    def drylevel_option_state(self):
-        drylevel = self.lookup_enum('DryLevel')
-        if drylevel == '-':
-            return 'OFF'
-        return WASHERDRYLEVEL(drylevel)
    
     @property
     def current_smartcourse(self):
@@ -2213,28 +2224,40 @@ class WasherStatus(object):
             return smartcourse
 
     @property
-    def freshcare_state(self):
+    def creasecare_state(self):
         return self.lookup_bit('Option1', 1)
 
     @property
     def childlock_state(self):
-        return self.lookup_bit('Option1', 3)
+        return self.lookup_bit('Option2', 7)
 
     @property
     def steam_state(self):
-        return self.lookup_bit('Option1', 4)
+        return self.lookup_bit('Option1', 7)
 
     @property
-    def turboshot_state(self):
-        return self.lookup_bit('Option2', 7)
+    def steam_softener_state(self):
+        return self.lookup_bit('Option1', 2)
+
+    @property
+    def doorlock_state(self):
+        return self.lookup_bit('Option2', 6)
+
+    @property
+    def prewash_state(self):
+        return self.lookup_bit('Option1', 6)
+
+    @property
+    def remotestart_state(self):
+        return self.lookup_bit('Option2', 1)
+
+    @property
+    def turbowash_state(self):
+        return self.lookup_bit('Option1', 0)
 
     @property
     def tubclean_count(self):
         return self.data['TCLCount']
-
-    @property
-    def load_level(self):
-        return self.lookup_enum('LoadLevel')
 
 
 """------------------for Dehumidifier"""
