@@ -14,8 +14,8 @@ GATEWAY_URL = 'https://kic.lgthinq.com:46030/api/common/gatewayUriList'
 APP_KEY = 'wideq'
 SECURITY_KEY = 'nuts_securitykey'
 DATA_ROOT = 'lgedmRoot'
-COUNTRY = 'DE'
-LANGUAGE = 'de-DE'
+COUNTRY = 'US'
+LANGUAGE = 'en-US'
 SVC_CODE = 'SVC202'
 CLIENT_ID = 'LGAO221A02'
 OAUTH_SECRET_KEY = 'c053c2a6ddeb7ad97cb0eed0dcb31cf8'
@@ -23,39 +23,54 @@ OAUTH_CLIENT_KEY = 'LGAO221A02'
 DATE_FORMAT = '%a, %d %b %Y %H:%M:%S +0000'
 
 """HVAC STATE"""
-STATE_COOL = '냉방'
-STATE_DRY = '제습'
+STATE_COOL  = "Cool"
+STATE_DRY  = "Dry"
 STATE_HEAT = '난방'
 STATE_AI = '인공지능'
 STATE_FAN = '송풍'
 STATE_ACO = 'ACO'
 
+STATE_AIRCLEAN = 'ON'
+STATE_AIRCLEAN_OFF = 'OFF'
+STATE_SMARTCARE = 'ON'
+STATE_SMARTCARE_OFF = 'OFF'
+STATE_AUTODRY = 'ON'
+STATE_AUTODRY_OFF = 'OFF'
+STATE_POWERSAVE = 'ON'
+STATE_POWERSAVE_OFF = 'OFF'
+STATE_COOLPOWER = 'ON'
+STATE_COOLPOWER_OFF = 'OFF'
+STATE_LONGPOWER = 'ON'
+STATE_LONGPOWER_OFF = 'OFF'
+
 STATE_MODE_ON = 'ON'
 STATE_MODE_OFF = 'OFF'
 
-STATE_LOW = '약'
-STATE_MID = '중'
-STATE_HIGH = '강'
+STATE_LOW  = "Low"
+STATE_MID  = "Mid"
+STATE_HIGH  = "High"
+
 STATE_AUTO = '자동'
 STATE_POWER = '파워'
-STATE_RIGHT_LOW_LEFT_MID = '우약/좌중'
-STATE_RIGHT_LOW_LEFT_HIGH = '우약/좌강'
-STATE_RIGHT_MID_LEFT_LOW = '우중/좌약'
-STATE_RIGHT_MID_LEFT_HIGH = '우중/좌강'
-STATE_RIGHT_HIGH_LEFT_LOW = '우강/좌약'
-STATE_RIGHT_HIGH_LEFT_MID = '우강/좌중'
-STATE_RIGHT_ONLY_LOW = '우약'
-STATE_RIGHT_ONLY_MID = '우중'
-STATE_RIGHT_ONLY_HIGH = '우강'
-STATE_LEFT_ONLY_LOW = '좌약'
-STATE_LEFT_ONLY_MID = '좌중'
-STATE_LEFT_ONLY_HIGH = '좌강'
 
-STATE_LEFT_RIGHT = '좌/우'
+STATE_RIGHT_LOW_LEFT_MID  = "Right low left mid"
+STATE_RIGHT_LOW_LEFT_HIGH  = "Right low left high"
+STATE_RIGHT_MID_LEFT_LOW  = "Right mid left low"
+STATE_RIGHT_MID_LEFT_HIGH  = "Right mid left high"
+STATE_RIGHT_HIGH_LEFT_LOW  = "Right high left low"
+STATE_RIGHT_HIGH_LEFT_MID  = "Right high left mid"
+STATE_RIGHT_ONLY_LOW  = "Right only low"
+STATE_RIGHT_ONLY_MID  = "Right only mid"
+STATE_RIGHT_ONLY_HIGH  = "Right only high"
+STATE_LEFT_ONLY_LOW  = "Left only low"
+STATE_LEFT_ONLY_MID  = "Left only mid"
+STATE_LEFT_ONLY_HIGH  = "Left only high"
+
+STATE_LEFT_RIGHT  = "Left right"
 STATE_LEFT_RIGHT_ON = '좌/우'
-STATE_RIGHTSIDE_LEFT_RIGHT = '우측 좌/우'
-STATE_LEFTSIDE_LEFT_RIGHT = '좌측 좌/우'
-STATE_LEFT_RIGHT_STOP = '정지'
+STATE_RIGHTSIDE_LEFT_RIGHT  = "Rightside left right"
+STATE_LEFTSIDE_LEFT_RIGHT  = "Leftside left right"
+STATE_LEFT_RIGHT_STOP  = "Left right stop"
 
 STATE_WDIRVSTEP_OFF = '꺼짐'
 STATE_WDIRVSTEP_FIRST = '1단계'
@@ -67,16 +82,16 @@ STATE_WDIRVSTEP_SIXTH = '6단계'
 
 
 """REFRIGERATOR STATE"""
-STATE_ICE_PLUS = '켜짐'
-STATE_ICE_PLUS_OFF = '꺼짐'
+STATE_ICE_PLUS = 'ON'
+STATE_ICE_PLUS_OFF = 'OFF'
 
 STATE_FRESH_AIR_FILTER_REPLACE_FILTER = '필터교체필요'
 STATE_FRESH_AIR_FILTER_SMART_CARE_ON = '켜짐'
 STATE_FRESH_AIR_FILTER_SMART_CARE_OFF = '꺼짐'
 STATE_FRESH_AIR_FILTER_SMART_CARE_WAIT = '대기'
-STATE_FRESH_AIR_FILTER_POWER = '파워'
-STATE_FRESH_AIR_FILTER_AUTO = '자동'
-STATE_FRESH_AIR_FILTER_OFF = '꺼짐'
+STATE_FRESH_AIR_FILTER_POWER  = "Fresh air filter power"
+STATE_FRESH_AIR_FILTER_AUTO  = "Fresh air filter auto"
+STATE_FRESH_AIR_FILTER_OFF  = "Fresh air filter off"
 
 
 STATE_SMART_SAVING_NIGHT = 'NIGHT'
@@ -93,184 +108,184 @@ STATE_REF_ACTIVESAVING_TWO = '2'
 STATE_REF_ACTIVESAVING_THREE = '3'
 
 """DRYER STATE"""
-STATE_DRYER_POWER_OFF = '꺼짐'
-STATE_DRYER_INITIAL = '코스선택'
-STATE_DRYER_RUNNING = '가동중'
-STATE_DRYER_PAUSE = '일시정지'
-STATE_DRYER_END = '종료'
-STATE_DRYER_ERROR = '에러'
+STATE_DRYER_POWER_OFF  = "Dryer power off"
+STATE_DRYER_INITIAL  = "Dryer initial"
+STATE_DRYER_RUNNING  = "Dryer running"
+STATE_DRYER_PAUSE  = "Dryer pause"
+STATE_DRYER_END  = "Dryer end"
+STATE_DRYER_ERROR  = "Dryer error"
 
-STATE_DRYER_PROCESS_DETECTING = '세탁물감지중'
-STATE_DRYER_PROCESS_STEAM = '스팀중'
-STATE_DRYER_PROCESS_DRY = '건조중'
-STATE_DRYER_PROCESS_COOLING = '송풍'
-STATE_DRYER_PROCESS_ANTI_CREASE = '구김방지'
-STATE_DRYER_PROCESS_END = '종료'
+STATE_DRYER_PROCESS_DETECTING  = "Dryer process detecting"
+STATE_DRYER_PROCESS_STEAM  = "Dryer process steam"
+STATE_DRYER_PROCESS_DRY  = "Dryer process dry"
+STATE_DRYER_PROCESS_COOLING  = "Dryer process cooling"
+STATE_DRYER_PROCESS_ANTI_CREASE  = "Dryer process anti crease"
+STATE_DRYER_PROCESS_END  = "Dryer process end"
 
-STATE_DRY_LEVEL_IRON = '약'
-STATE_DRY_LEVEL_CUPBOARD = '표준'
-STATE_DRY_LEVEL_EXTRA = '강력'
+STATE_DRY_LEVEL_IRON  = "Dry level iron"
+STATE_DRY_LEVEL_CUPBOARD  = "Dry level cupboard"
+STATE_DRY_LEVEL_EXTRA  = "Dry level extra"
 
-STATE_ECOHYBRID_ECO = '에너지'
-STATE_ECOHYBRID_NORMAL = '표준'
-STATE_ECOHYBRID_TURBO = '스피드'
+STATE_ECOHYBRID_ECO  = "Ecohybrid eco"
+STATE_ECOHYBRID_NORMAL  = "Ecohybrid normal"
+STATE_ECOHYBRID_TURBO  = "Ecohybrid turbo"
 
-STATE_COURSE_COTTON_SOFT = '타월'
-STATE_COURSE_BULKY_ITEM = '이불'
-STATE_COURSE_EASY_CARE = '셔츠'
-STATE_COURSE_COTTON = '표준'
-STATE_COURSE_SPORTS_WEAR = '기능성의류'
-STATE_COURSE_QUICK_DRY = '소량급속'
-STATE_COURSE_WOOL = '울/섬세'
-STATE_COURSE_RACK_DRY = '선반건조'
-STATE_COURSE_COOL_AIR = '송풍'
-STATE_COURSE_WARM_AIR = '온풍'
-STATE_COURSE_BEDDING_BRUSH = '침구털기'
-STATE_COURSE_STERILIZATION = '살균'
-STATE_COURSE_REFRESH = '리프레쉬'
-STATE_COURSE_POWER = '강력'
+STATE_COURSE_COTTON_SOFT  = "Course cotton soft"
+STATE_COURSE_BULKY_ITEM  = "Course bulky item"
+STATE_COURSE_EASY_CARE  = "Course easy care"
+STATE_COURSE_COTTON  = "Course cotton"
+STATE_COURSE_SPORTS_WEAR  = "Course sports wear"
+STATE_COURSE_QUICK_DRY  = "Course quick dry"
+STATE_COURSE_WOOL  = "Course wool"
+STATE_COURSE_RACK_DRY  = "Course rack dry"
+STATE_COURSE_COOL_AIR  = "Course cool air"
+STATE_COURSE_WARM_AIR  = "Course warm air"
+STATE_COURSE_BEDDING_BRUSH  = "Course bedding brush"
+STATE_COURSE_STERILIZATION  = "Course sterilization"
+STATE_COURSE_REFRESH  = "Course refresh"
+STATE_COURSE_POWER  = "Course power"
 
-STATE_SMARTCOURSE_GYM_CLOTHES = '운동복'
-STATE_SMARTCOURSE_RAINY_SEASON = '장마철'
-STATE_SMARTCOURSE_DEODORIZATION = '리프레쉬'
-STATE_SMARTCOURSE_SMALL_LOAD = '소량 건조'
-STATE_SMARTCOURSE_LINGERIE = '란제리'
-STATE_SMARTCOURSE_EASY_IRON = '촉촉 건조'
-STATE_SMARTCOURSE_SUPER_DRY = '강력 건조'
-STATE_SMARTCOURSE_ECONOMIC_DRY = '절약 건조'
-STATE_SMARTCOURSE_BIG_SIZE_ITEM = '큰 빨래 건조'
-STATE_SMARTCOURSE_MINIMIZE_WRINKLES = '구김 완화 건조'
-STATE_SMARTCOURSE_FULL_SIZE_LOAD = '다량건조'
-STATE_SMARTCOURSE_JEAN = '청바지'
+STATE_SMARTCOURSE_GYM_CLOTHES  = "Smartcourse gym clothes"
+STATE_SMARTCOURSE_RAINY_SEASON  = "Smartcourse rainy season"
+STATE_SMARTCOURSE_DEODORIZATION  = "Smartcourse deodorization"
+STATE_SMARTCOURSE_SMALL_LOAD  = "Smartcourse small load"
+STATE_SMARTCOURSE_LINGERIE  = "Smartcourse lingerie"
+STATE_SMARTCOURSE_EASY_IRON  = "Smartcourse easy iron"
+STATE_SMARTCOURSE_SUPER_DRY  = "Smartcourse super dry"
+STATE_SMARTCOURSE_ECONOMIC_DRY  = "Smartcourse economic dry"
+STATE_SMARTCOURSE_BIG_SIZE_ITEM  = "Smartcourse big size item"
+STATE_SMARTCOURSE_MINIMIZE_WRINKLES  = "Smartcourse minimize wrinkles"
+STATE_SMARTCOURSE_FULL_SIZE_LOAD  = "Smartcourse full size load"
+STATE_SMARTCOURSE_JEAN  = "Smartcourse jean"
 
-STATE_ERROR_DOOR = '문열림 에러 - 문이 닫혔는지 확인하세요'
-STATE_ERROR_DRAINMOTOR = '배수펌프 에러 - 배수라인이 동결되었는지 확인하세요'
-STATE_ERROR_LE1 = '과부하 에러 - 세탁물 양을 확인하세요'
-STATE_ERROR_TE1 = '온도센서 에러 - 서비스 센터에 문의하세요'
-STATE_ERROR_TE2 = '온도센서 에러 - 서비스 센터에 문의하세요'
-STATE_ERROR_F1 = '과온 에러 - 서비스 센터에 문의하세요'
-STATE_ERROR_LE2 = '컴프레서 에러 - 서비스 센터에 문의하세요'
-STATE_ERROR_AE = '컴프레서 에러 - 서비스 센터에 문의하세요'
-STATE_ERROR_dE4 = 'ERROR_dE4'
-STATE_ERROR_NOFILTER = '필터 없음 - 필터를 삽입해 주세요'
-STATE_ERROR_EMPTYWATER = '물통 가득참 - 물통을 비워주세요'
-STATE_ERROR_CE1 = 'ERROR_CE1'
-STATE_NO_ERROR = '정상'
+STATE_ERROR_DOOR  = "Error door"
+STATE_ERROR_DRAINMOTOR  = "Error drainmotor"
+STATE_ERROR_LE1  = "Error le1"
+STATE_ERROR_TE1  = "Error te1"
+STATE_ERROR_TE2  = "Error te2"
+STATE_ERROR_F1  = "Error f1"
+STATE_ERROR_LE2  = "Error le2"
+STATE_ERROR_AE  = "Error ae"
+STATE_ERROR_dE4  = "Error de4"
+STATE_ERROR_NOFILTER  = "Error nofilter"
+STATE_ERROR_EMPTYWATER  = "Error emptywater"
+STATE_ERROR_CE1  = "Error ce1"
+STATE_NO_ERROR  = "No error"
 
-STATE_OPTIONITEM_ON = '켜짐'
-STATE_OPTIONITEM_OFF = '꺼짐'
+STATE_OPTIONITEM_ON  = "Optionitem on"
+STATE_OPTIONITEM_OFF  = "Optionitem off"
 
 """WASHER STATE"""
-STATE_WASHER_POWER_OFF = '꺼짐'
-STATE_WASHER_INITIAL = '코스선택'
-STATE_WASHER_PAUSE = '일시정지'
-STATE_WASHER_ERROR_AUTO_OFF = '에러_자동종료'
-STATE_WASHER_RESERVE = '예약중'
-STATE_WASHER_DETECTING = '세탁물 감지 중'
-STATE_WASHER_ADD_DRAIN = 'ADD_DRAIN'
-STATE_WASHER_DETERGENT_AMOUT = '세제량'
-STATE_WASHER_RUNNING = '세탁 중'
-STATE_WASHER_PREWASH = '애벌세탁 중'
-STATE_WASHER_RINSING = '헹굼 중'
-STATE_WASHER_RINSE_HOLD = '헹굼 대기'
-STATE_WASHER_SPINNING = '탈수 중'
-STATE_WASHER_DRYING = '건조 중'
-STATE_WASHER_END = '종료'
-STATE_WASHER_FRESHCARE = 'FreshCare'
-STATE_WASHER_TCL_ALARM_NORMAL = '통세척'
-STATE_WASHER_FROZEN_PREVENT_INITIAL = '동파방지_초기화'
-STATE_WASHER_FROZEN_PREVENT_RUNNING = '동파방지_동작중'
-STATE_WASHER_FROZEN_PREVENT_PAUSE = '동파방지_일시정지'
-STATE_WASHER_ERROR = '에러'
+STATE_WASHER_POWER_OFF  = "Washer power off"
+STATE_WASHER_INITIAL  = "Washer initial"
+STATE_WASHER_PAUSE  = "Washer pause"
+STATE_WASHER_ERROR_AUTO_OFF  = "Washer error auto off"
+STATE_WASHER_RESERVE  = "Washer reserve"
+STATE_WASHER_DETECTING  = "Washer detecting"
+STATE_WASHER_ADD_DRAIN  = "Washer add drain"
+STATE_WASHER_DETERGENT_AMOUT  = "Washer detergent amout"
+STATE_WASHER_RUNNING  = "Washer running"
+STATE_WASHER_PREWASH  = "Washer prewash"
+STATE_WASHER_RINSING  = "Washer rinsing"
+STATE_WASHER_RINSE_HOLD  = "Washer rinse hold"
+STATE_WASHER_SPINNING  = "Washer spinning"
+STATE_WASHER_DRYING  = "Washer drying"
+STATE_WASHER_END  = "Washer end"
+STATE_WASHER_FRESHCARE  = "Washer freshcare"
+STATE_WASHER_TCL_ALARM_NORMAL  = "Washer tcl alarm normal"
+STATE_WASHER_FROZEN_PREVENT_INITIAL  = "Washer frozen prevent initial"
+STATE_WASHER_FROZEN_PREVENT_RUNNING  = "Washer frozen prevent running"
+STATE_WASHER_FROZEN_PREVENT_PAUSE  = "Washer frozen prevent pause"
+STATE_WASHER_ERROR  = "Washer error"
 
-STATE_WASHER_SOILLEVEL_LIGHT = '적은때'
-STATE_WASHER_SOILLEVEL_NORMAL = '표준'
-STATE_WASHER_SOILLEVEL_HEAVY = '강력'
-STATE_WASHER_SOILLEVEL_PRE_WASH = '애벌세탁'
-STATE_WASHER_SOILLEVEL_SOAKING = '불림'
+STATE_WASHER_SOILLEVEL_LIGHT  = "Washer soillevel light"
+STATE_WASHER_SOILLEVEL_NORMAL  = "Washer soillevel normal"
+STATE_WASHER_SOILLEVEL_HEAVY  = "Washer soillevel heavy"
+STATE_WASHER_SOILLEVEL_PRE_WASH  = "Washer soillevel pre wash"
+STATE_WASHER_SOILLEVEL_SOAKING  = "Washer soillevel soaking"
 
-STATE_WASHER_WATERTEMP_COLD = '냉수'
+STATE_WASHER_WATERTEMP_COLD  = "Washer watertemp cold"
 STATE_WASHER_WATERTEMP_30 = '30℃'
 STATE_WASHER_WATERTEMP_40 = '40℃'
 STATE_WASHER_WATERTEMP_60 = '60℃'
 STATE_WASHER_WATERTEMP_95 = '95℃'
 
-STATE_WASHER_SPINSPEED_EXTRA_LOW = '섬세'
-STATE_WASHER_SPINSPEED_LOW = '약'
-STATE_WASHER_SPINSPEED_MEDIUM = '중'
-STATE_WASHER_SPINSPEED_HIGH = '강'
-STATE_WASHER_SPINSPEED_EXTRA_HIGH = '건조맞춤'
+STATE_WASHER_SPINSPEED_EXTRA_LOW  = "Washer spinspeed extra low"
+STATE_WASHER_SPINSPEED_LOW  = "Washer spinspeed low"
+STATE_WASHER_SPINSPEED_MEDIUM  = "Washer spinspeed medium"
+STATE_WASHER_SPINSPEED_HIGH  = "Washer spinspeed high"
+STATE_WASHER_SPINSPEED_EXTRA_HIGH  = "Washer spinspeed extra high"
 
-STATE_WASHER_RINSECOUNT_1 = '1회'
-STATE_WASHER_RINSECOUNT_2 = '2회'
-STATE_WASHER_RINSECOUNT_3 = '3회'
-STATE_WASHER_RINSECOUNT_4 = '4회'
-STATE_WASHER_RINSECOUNT_5 = '5회'
+STATE_WASHER_RINSECOUNT_1  = "Washer rinsecount 1"
+STATE_WASHER_RINSECOUNT_2  = "Washer rinsecount 2"
+STATE_WASHER_RINSECOUNT_3  = "Washer rinsecount 3"
+STATE_WASHER_RINSECOUNT_4  = "Washer rinsecount 4"
+STATE_WASHER_RINSECOUNT_5  = "Washer rinsecount 5"
 
-STATE_WASHER_DRYLEVEL_WIND = '바람건조'
-STATE_WASHER_DRYLEVEL_TURBO = '터보건조'
-STATE_WASHER_DRYLEVEL_TIME_30 = '시간건조_30분'
-STATE_WASHER_DRYLEVEL_TIME_60 = '시간건조_60분'
-STATE_WASHER_DRYLEVEL_TIME_90 = '시간건조_90분'
-STATE_WASHER_DRYLEVEL_TIME_120 = '시간건조_120분'
-STATE_WASHER_DRYLEVEL_TIME_150 = '시간건조_150분'
+STATE_WASHER_DRYLEVEL_WIND  = "Washer drylevel wind"
+STATE_WASHER_DRYLEVEL_TURBO  = "Washer drylevel turbo"
+STATE_WASHER_DRYLEVEL_TIME_30  = "Washer drylevel time 30"
+STATE_WASHER_DRYLEVEL_TIME_60  = "Washer drylevel time 60"
+STATE_WASHER_DRYLEVEL_TIME_90  = "Washer drylevel time 90"
+STATE_WASHER_DRYLEVEL_TIME_120  = "Washer drylevel time 120"
+STATE_WASHER_DRYLEVEL_TIME_150  = "Washer drylevel time 150"
 
-STATE_WASHER_NO_ERROR = '정상'
-STATE_WASHER_ERROR_dE2 = '문열림 에러 - 문이 닫혔는지 확인하세요'
-STATE_WASHER_ERROR_IE = '급수안됨'
-STATE_WASHER_ERROR_OE = '배수안됨'
-STATE_WASHER_ERROR_UE = '세탁물 치우침'
-STATE_WASHER_ERROR_FE = 'FE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_PE = 'PE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_LE = 'LE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_tE = 'tE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_dHE = 'dHE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_CE = 'CE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_PF = 'PF - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_FF = '제품 얼음'
-STATE_WASHER_ERROR_dCE = 'dCE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_EE = 'EE - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_PS = 'PS - 서비스 센터에 문의하세요'
-STATE_WASHER_ERROR_dE1 = '문열림 에러 - 문이 닫혔는지 확인하세요'
-STATE_WASHER_ERROR_LOE = '세제통 문열림 에러 - 세제통 문이 닫혔는지 확인하세요'
+STATE_WASHER_NO_ERROR  = "Washer no error"
+STATE_WASHER_ERROR_dE2  = "Washer error de2"
+STATE_WASHER_ERROR_IE  = "Washer error ie"
+STATE_WASHER_ERROR_OE  = "Washer error oe"
+STATE_WASHER_ERROR_UE  = "Washer error ue"
+STATE_WASHER_ERROR_FE  = "Washer error fe"
+STATE_WASHER_ERROR_PE  = "Washer error pe"
+STATE_WASHER_ERROR_LE  = "Washer error le"
+STATE_WASHER_ERROR_tE  = "Washer error te"
+STATE_WASHER_ERROR_dHE  = "Washer error dhe"
+STATE_WASHER_ERROR_CE  = "Washer error ce"
+STATE_WASHER_ERROR_PF  = "Washer error pf"
+STATE_WASHER_ERROR_FF  = "Washer error ff"
+STATE_WASHER_ERROR_dCE  = "Washer error dce"
+STATE_WASHER_ERROR_EE  = "Washer error ee"
+STATE_WASHER_ERROR_PS  = "Washer error ps"
+STATE_WASHER_ERROR_dE1  = "Washer error de1"
+STATE_WASHER_ERROR_LOE  = "Washer error loe"
 
-STATE_WASHER_APCOURSE_COTTON = '표준세탁'
-STATE_WASHER_APCOURSE_SPEEDWASH_DRY = '스피드워시+건조'
-STATE_WASHER_APCOURSE_SPEEDWASH = '스피드워시'
-STATE_WASHER_APCOURSE_SINGLE_SHIRT_DRY = '셔츠한벌건조'
-STATE_WASHER_APCOURSE_RINSESPIN = '헹굼+탈수'
-STATE_WASHER_APCOURSE_SPEEDBOIL = '알뜰삶음'
-STATE_WASHER_APCOURSE_ALLERGYCARE = '알러지케어'
-STATE_WASHER_APCOURSE_STEAMCLEANING = '스팀클리닝'
-STATE_WASHER_APCOURSE_BABYWEAR = '아기옷'
-STATE_WASHER_APCOURSE_BLANKET_ROB = '이불살균털기'
-STATE_WASHER_APCOURSE_UTILITY = '기능성의류'
-STATE_WASHER_APCOURSE_BLANKET = '이불'
-STATE_WASHER_APCOURSE_LINGERIE_WOOL = '란제리/울'
-STATE_WASHER_APCOURSE_COLDWASH = '찬물세탁'
-STATE_WASHER_APCOURSE_TUBCLEAN_SANITARY = '통살균'
-STATE_WASHER_APCOURSE_DOWNLOAD_COUSE = '다운로드코스'
+STATE_WASHER_APCOURSE_COTTON  = "Washer apcourse cotton"
+STATE_WASHER_APCOURSE_SPEEDWASH_DRY  = "Washer apcourse speedwash dry"
+STATE_WASHER_APCOURSE_SPEEDWASH  = "Washer apcourse speedwash"
+STATE_WASHER_APCOURSE_SINGLE_SHIRT_DRY  = "Washer apcourse single shirt dry"
+STATE_WASHER_APCOURSE_RINSESPIN  = "Washer apcourse rinsespin"
+STATE_WASHER_APCOURSE_SPEEDBOIL  = "Washer apcourse speedboil"
+STATE_WASHER_APCOURSE_ALLERGYCARE  = "Washer apcourse allergycare"
+STATE_WASHER_APCOURSE_STEAMCLEANING  = "Washer apcourse steamcleaning"
+STATE_WASHER_APCOURSE_BABYWEAR  = "Washer apcourse babywear"
+STATE_WASHER_APCOURSE_BLANKET_ROB  = "Washer apcourse blanket rob"
+STATE_WASHER_APCOURSE_UTILITY  = "Washer apcourse utility"
+STATE_WASHER_APCOURSE_BLANKET  = "Washer apcourse blanket"
+STATE_WASHER_APCOURSE_LINGERIE_WOOL  = "Washer apcourse lingerie wool"
+STATE_WASHER_APCOURSE_COLDWASH  = "Washer apcourse coldwash"
+STATE_WASHER_APCOURSE_TUBCLEAN_SANITARY  = "Washer apcourse tubclean sanitary"
+STATE_WASHER_APCOURSE_DOWNLOAD_COUSE  = "Washer apcourse download couse"
 
-STATE_WASHER_SMARTCOURSE_SILENT = '조용조용'
-STATE_WASHER_SMARTCOURSE_SMALL_LOAD = '소량 세탁'
-STATE_WASHER_SMARTCOURSE_SKIN_CARE = '스킨 케어'
-STATE_WASHER_SMARTCOURSE_RAINY_SEASON = '장마철 세탁'
-STATE_WASHER_SMARTCOURSE_SWEAT_STAIN = '땀얼룩 제거'
-STATE_WASHER_SMARTCOURSE_SINGLE_GARMENT = '한벌 세탁'
-STATE_WASHER_SMARTCOURSE_SCHOOL_UNIFORM = '교복'
-STATE_WASHER_SMARTCOURSE_STATIC_REMOVAL = '정전기 제거'
-STATE_WASHER_SMARTCOURSE_COLOR_CARE = '컬러 케어'
-STATE_WASHER_SMARTCOURSE_SPIN_ONLY = '탈수 전용'
-STATE_WASHER_SMARTCOURSE_DEODORIZATION = '냄새 제거'
-STATE_WASHER_SMARTCOURSE_BEDDING_CARE = '침구 케어'
-STATE_WASHER_SMARTCOURSE_CLOTH_CARE = '옷감 보호'
-STATE_WASHER_SMARTCOURSE_SMART_RINSE = '안심 헹굼'
-STATE_WASHER_SMARTCOURSE_ECO_WASH = '알뜰 세탁'
+STATE_WASHER_SMARTCOURSE_SILENT  = "Washer smartcourse silent"
+STATE_WASHER_SMARTCOURSE_SMALL_LOAD  = "Washer smartcourse small load"
+STATE_WASHER_SMARTCOURSE_SKIN_CARE  = "Washer smartcourse skin care"
+STATE_WASHER_SMARTCOURSE_RAINY_SEASON  = "Washer smartcourse rainy season"
+STATE_WASHER_SMARTCOURSE_SWEAT_STAIN  = "Washer smartcourse sweat stain"
+STATE_WASHER_SMARTCOURSE_SINGLE_GARMENT  = "Washer smartcourse single garment"
+STATE_WASHER_SMARTCOURSE_SCHOOL_UNIFORM  = "Washer smartcourse school uniform"
+STATE_WASHER_SMARTCOURSE_STATIC_REMOVAL  = "Washer smartcourse static removal"
+STATE_WASHER_SMARTCOURSE_COLOR_CARE  = "Washer smartcourse color care"
+STATE_WASHER_SMARTCOURSE_SPIN_ONLY  = "Washer smartcourse spin only"
+STATE_WASHER_SMARTCOURSE_DEODORIZATION  = "Washer smartcourse deodorization"
+STATE_WASHER_SMARTCOURSE_BEDDING_CARE  = "Washer smartcourse bedding care"
+STATE_WASHER_SMARTCOURSE_CLOTH_CARE  = "Washer smartcourse cloth care"
+STATE_WASHER_SMARTCOURSE_SMART_RINSE  = "Washer smartcourse smart rinse"
+STATE_WASHER_SMARTCOURSE_ECO_WASH  = "Washer smartcourse eco wash"
 
-STATE_WASHER_TERM_NO_SELECT = '선택 안함'
+STATE_WASHER_TERM_NO_SELECT  = "Washer term no select"
 
-STATE_WASHER_OPTIONITEM_ON = '켜짐'
-STATE_WASHER_OPTIONITEM_OFF = '꺼짐'
+STATE_WASHER_OPTIONITEM_ON  = "Washer optionitem on"
+STATE_WASHER_OPTIONITEM_OFF  = "Washer optionitem off"
 
 """DEHUMIDIFIER STATE"""
 STATE_DEHUM_ON = '동작 중'
@@ -1566,23 +1581,32 @@ class ICEPLUS(enum.Enum):
 
     OFF = "@CP_OFF_EN_W"
     ON = "@CP_ON_EN_W"
+    
+class ECOFRIENDLY(enum.Enum):
+
+    OFF = "@CP_OFF_EN_W"
+    ON = "@CP_ON_EN_W"
+    
 
 class FRESHAIRFILTER(enum.Enum):
 
     OFF = "@CP_TERM_OFF_KO_W"
-    NOT_USE = "@CP_TERM_OFF_KO_W"
     AUTO = "@RE_STATE_FRESH_AIR_FILTER_MODE_AUTO_W"
     POWER = "@RE_STATE_FRESH_AIR_FILTER_MODE_POWER_W"
     REPLACE_FILTER = "@RE_STATE_REPLACE_FILTER_W"
     SMARTCARE_ON = "@RE_STATE_SMART_SMART_CARE_ON"
     SMARTCARE_OFF = "@RE_STATE_SMART_SMART_CARE_OFF"
     SMARTCARE_WAIT = "@RE_STATE_SMART_SMART_CARE_WAIT"
+    NOT_USE = "NOT_USE"
+
 
 class SMARTSAVING(enum.Enum):
 
     OFF = "@CP_TERM_USE_NOT_W"
     NIGHT = "@RE_SMARTSAVING_MODE_NIGHT_W"
     CUSTOM = "@RE_SMARTSAVING_MODE_CUSTOM_W"
+    NOT_USE = "NOT_USE"
+
 
 class RefDevice(Device):
     
@@ -1685,6 +1709,10 @@ class RefStatus(object):
         return ICEPLUS(self.lookup_enum('IcePlus'))
     
     @property
+    def ecofriendly_state(self):
+        return ECOFRIENDLY(self.lookup_enum('EcoFriendly'))
+    
+    @property
     def freshairfilter_state(self):
         return FRESHAIRFILTER(self.lookup_enum('FreshAirFilter'))
     
@@ -1707,8 +1735,10 @@ class RefStatus(object):
     
     @property
     def smartsaving_state(self):
-        return self.lookup_enum('SmartSavingModeStatus')
-    
+        try:
+            return self.lookup_enum('SmartSavingModeStatus')
+        except KeyError:
+            return self.lookup_enum('SmartSavingMode')
     @property
     def locking_state(self):
         return self.lookup_enum('LockingStatus')
